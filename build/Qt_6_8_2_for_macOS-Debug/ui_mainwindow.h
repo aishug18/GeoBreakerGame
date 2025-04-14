@@ -27,8 +27,8 @@ public:
     QWidget *centralwidget;
     QWidget *widget;
     QVBoxLayout *verticalLayout_2;
-    QVBoxLayout *verticalLayout;
     QLabel *imageLabel;
+    QVBoxLayout *verticalLayout;
     QPushButton *play;
     QPushButton *Tutorial;
     QMenuBar *menubar;
@@ -43,18 +43,18 @@ public:
         centralwidget->setObjectName("centralwidget");
         widget = new QWidget(centralwidget);
         widget->setObjectName("widget");
-        widget->setGeometry(QRect(190, 20, 351, 431));
+        widget->setGeometry(QRect(180, 50, 421, 411));
         verticalLayout_2 = new QVBoxLayout(widget);
         verticalLayout_2->setObjectName("verticalLayout_2");
         verticalLayout_2->setContentsMargins(0, 0, 0, 0);
-        verticalLayout = new QVBoxLayout();
-        verticalLayout->setObjectName("verticalLayout");
         imageLabel = new QLabel(widget);
         imageLabel->setObjectName("imageLabel");
         imageLabel->setScaledContents(true);
 
-        verticalLayout->addWidget(imageLabel);
+        verticalLayout_2->addWidget(imageLabel);
 
+        verticalLayout = new QVBoxLayout();
+        verticalLayout->setObjectName("verticalLayout");
         play = new QPushButton(widget);
         play->setObjectName("play");
         QFont font;
