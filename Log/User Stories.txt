@@ -1,0 +1,26 @@
+Gameplay Mechanics 
+As a player, I want to launch a ball using a paddle so I can break bricks labeled with possible answers. 
+As a player, I want the game to use realistic physics for ball movement and collisions so that gameplay feels dynamic and engaging. 
+As a player, I want to control the paddle using my keyboard or mouse so I can aim the ball strategically. 
+As a player, I want the game to keep track of my score based on accuracy so I can measure my progress.
+
+Educational Features 
+As a player, I want to see an interactive 2D map before starting the game so I can learn key geography facts before playing. 
+As a player, I want to see a short explanation of the correct answer after each round so I can reinforce my learning. 
+As a player, I want the game to provide fun facts about the question topic so I can expand my knowledge beyond just the correct answer. 
+As a player, I want difficulty levels that adjust the speed of the ball and complexity of questions so I can challenge myself appropriately. 
+As a player, I want to unlock new question categories as I progress so I stay motivated to keep learning. 
+
+User Interface & Experience 
+As a player, I want a clean and visually appealing UI so I can easily focus on both gameplay and learning. 
+As a player, I want intuitive controls with clear instructions so I can quickly understand how to play. 
+As a player, I want to pause or quit the game at any time so I can take a break if needed. 
+As a player, I want to see my score history and progress over time so I can track my improvement. 
+As a player, I want sound effects and background music that enhance the experience without being distracting. 
+
+Game Development & Technical 
+As a developer, I want to integrate Box2D physics so the ball and bricks behave realistically. 
+As a developer, I want to use a question database so that trivia questions are diverse and non-repetitive. 
+As a developer, I want to design the game with modular code so new question categories or mechanics can be added easily. 
+As a developer, I want to implement a save system so players can track their progress across sessions. 
+As a developer, I want to use GitHub for version control so our team can collaborate efficiently.
