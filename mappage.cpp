@@ -9,6 +9,30 @@ MapPage::MapPage(QWidget *parent)
 {
     ui->setupUi(this);
     this->setWindowTitle("Map Page");
+    this->setStyleSheet(
+        "MapPage {"
+        " background-image: url(:/images/assets/world_map.jpg);"
+        " background-repeat: no-repeat;"
+        " background-position: center;"
+        " }"
+        );
+
+    QString buttonStyle = R"(
+    QPushButton {
+        border-image: url(:/images/assets/wood_button.png);
+        color: black     ;
+        font-weight: bold;
+        font-size: 16px;
+        padding: 10px;
+    }
+    QPushButton:hover {
+        opacity: 0.85;
+    }
+)";
+
+    ui->enterGameButton->setStyleSheet(buttonStyle);
+    ui->returnToMenuButton->setStyleSheet(buttonStyle);
+
 }
 
 MapPage::~MapPage()

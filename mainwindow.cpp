@@ -18,11 +18,21 @@ MainWindow::MainWindow(QWidget *parent)
     ui->imageLabel->setScaledContents(true);
     ui->imageLabel->setPixmap(image);
 
-    // Example: pushButton_1 -> soft blue
-    ui->play->setStyleSheet("QPushButton { background-color: #add8e6; color: black; border-radius: 8px; padding: 6px; }");
+    QString menuButtonStyle = R"(
+    QPushButton {
+        border-image: url(:/images/assets/wood_button.png);
+        color: white;
+        font-weight: bold;
+        font-size: 18px;
+        padding: 10px;
+    }
+    QPushButton:hover {
+        opacity: 0.9;
+    }
+)";
 
-    // Example: pushButton_2 -> pastel pink
-    ui->Tutorial->setStyleSheet("QPushButton { background-color: #ffb6c1; color: black; border-radius: 8px; padding: 6px; }");
+    ui->play->setStyleSheet(menuButtonStyle);
+    ui->Tutorial->setStyleSheet(menuButtonStyle);
 
     connect(ui->Tutorial, &QPushButton::clicked, this, [=]() {
         TutorialPage tutorial(this);
