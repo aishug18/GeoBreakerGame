@@ -1,0 +1,802 @@
+[
+    {
+        "Country":"Australia",
+        "Round":1,
+        "Type":"Easy (flag\/location)",
+        "Question":"Which of these is the flag of Australia?",
+        "Answer":"(Image of the Australian flag)",
+        "Options":"(Image of the flag of New Zealand);(Image of the flag of the United Kingdom);(Image of the flag of the USA);(Image of the flag of Canada)"
+    },
+    {
+        "Country":"Australia",
+        "Round":2,
+        "Type":"Medium (capital\/GDP)",
+        "Question":"What is the capital of Australia?",
+        "Answer":"Canberra",
+        "Options":"Sydney;Melbourne;Perth;Brisbane"
+    },
+    {
+        "Country":"Australia",
+        "Round":3,
+        "Type":"Culture",
+        "Question":"What is a famous indigenous wind instrument from Australia?",
+        "Answer":"Didgeridoo",
+        "Options":"Sitar;Tambourine;Flute;Koto"
+    },
+    {
+        "Country":"Australia",
+        "Round":4,
+        "Type":"Fun Fact 1",
+        "Question":"Which animal is only found naturally in Australia and Tasmania?",
+        "Answer":"Kangaroo",
+        "Options":"Emu;Koala;Wombat;Dingo"
+    },
+    {
+        "Country":"Australia",
+        "Round":5,
+        "Type":"Fun Fact 2\/Niche",
+        "Question":"What is the name of the large natural coral reef off the coast of Queensland, Australia?",
+        "Answer":"Great Barrier Reef",
+        "Options":"Belize Barrier Reef;Red Sea Coral Reef;Mesoamerican Barrier Reef System;Apo Reef"
+    },
+    {
+        "Country":"New Zealand",
+        "Round":1,
+        "Type":"Easy (flag\/location)",
+        "Question":"What color is the star constellation on the flag of New Zealand?",
+        "Answer":"Red",
+        "Options":"Blue;White;Yellow;Black"
+    },
+    {
+        "Country":"New Zealand",
+        "Round":2,
+        "Type":"Medium (capital\/GDP)",
+        "Question":"What is the capital city of New Zealand?",
+        "Answer":"Wellington",
+        "Options":"Auckland;Christchurch;Hamilton;Dunedin"
+    },
+    {
+        "Country":"New Zealand",
+        "Round":3,
+        "Type":"Culture",
+        "Question":"What is the name of the traditional M\u0101ori war dance?",
+        "Answer":"Haka",
+        "Options":"Tango;Salsa;Ballet;Bharatanatyam"
+    },
+    {
+        "Country":"New Zealand",
+        "Round":4,
+        "Type":"Fun Fact 1",
+        "Question":"Which flightless bird is a national symbol of New Zealand?",
+        "Answer":"Kiwi",
+        "Options":"Emu;Ostrich;Penguin;Cassowary"
+    },
+    {
+        "Country":"New Zealand",
+        "Round":5,
+        "Type":"Fun Fact 2\/Niche",
+        "Question":"What is the name of the longest river in New Zealand?",
+        "Answer":"Waikato River",
+        "Options":"Clutha River;Whanganui River;Taieri River;Rangitikei River"
+    },
+    {
+        "Country":"China",
+        "Round":1,
+        "Type":"Easy (flag\/location)",
+        "Question":"What is the main color of the flag of China?",
+        "Answer":"Red",
+        "Options":"Yellow;Blue;Green;White"
+    },
+    {
+        "Country":"China",
+        "Round":2,
+        "Type":"Medium (capital\/GDP)",
+        "Question":"What is the capital of China?",
+        "Answer":"Beijing",
+        "Options":"Shanghai;Hong Kong;Guangzhou;Tianjin"
+    },
+    {
+        "Country":"China",
+        "Round":3,
+        "Type":"Culture",
+        "Question":"Which philosophy has had a profound influence on Chinese culture?",
+        "Answer":"Confucianism",
+        "Options":"Taoism;Buddhism;Shintoism;Hinduism"
+    },
+    {
+        "Country":"China",
+        "Round":4,
+        "Type":"Fun Fact 1",
+        "Question":"What is the name of the longest wall in the world, located in China?",
+        "Answer":"Great Wall",
+        "Options":"Hadrian's Wall;Great Wall of India;Berlin Wall;Antonine Wall"
+    },
+    {
+        "Country":"China",
+        "Round":5,
+        "Type":"Fun Fact 2\/Niche",
+        "Question":"What is the name of the giant panda's primary food source?",
+        "Answer":"Bamboo",
+        "Options":"Eucalyptus;Berries;Fish;Insects"
+    },
+    {
+        "Country":"Japan",
+        "Round":1,
+        "Type":"Easy (flag\/location)",
+        "Question":"What shape is in the center of the flag of Japan?",
+        "Answer":"Circle",
+        "Options":"Square;Triangle;Star;Crescent"
+    },
+    {
+        "Country":"Japan",
+        "Round":2,
+        "Type":"Medium (capital\/GDP)",
+        "Question":"What is the capital of Japan?",
+        "Answer":"Tokyo",
+        "Options":"Kyoto;Osaka;Nagoya;Yokohama"
+    },
+    {
+        "Country":"Japan",
+        "Round":3,
+        "Type":"Culture",
+        "Question":"What is the traditional Japanese art of paper folding called?",
+        "Answer":"Origami",
+        "Options":"Kirigami;Calligraphy;Ikebana;Bonsai"
+    },
+    {
+        "Country":"Japan",
+        "Round":4,
+        "Type":"Fun Fact 1",
+        "Question":"Which country is credited with inventing instant noodles?",
+        "Answer":"Japan",
+        "Options":"China;South Korea;Thailand;Vietnam"
+    },
+    {
+        "Country":"Japan",
+        "Round":5,
+        "Type":"Fun Fact 2\/Niche",
+        "Question":"What is the name of the highest mountain in Japan?",
+        "Answer":"Mount Fuji",
+        "Options":"Mount Kita;Mount Hotaka;Mount Aino;Mount Yari"
+    },
+    {
+        "Country":"India",
+        "Round":1,
+        "Type":"Easy (flag\/location)",
+        "Question":"What color is the chakra (wheel) in the center of the Indian flag?",
+        "Answer":"Navy Blue",
+        "Options":"Green;Saffron;White;Red"
+    },
+    {
+        "Country":"India",
+        "Round":2,
+        "Type":"Medium (capital\/GDP)",
+        "Question":"What is the capital of India?",
+        "Answer":"New Delhi",
+        "Options":"Mumbai;Kolkata;Chennai;Bangalore"
+    },
+    {
+        "Country":"India",
+        "Round":3,
+        "Type":"Culture",
+        "Question":"What is the name of the traditional Indian system of medicine?",
+        "Answer":"Ayurveda",
+        "Options":"Yoga;Unani;Homeopathy;Naturopathy"
+    },
+    {
+        "Country":"India",
+        "Round":4,
+        "Type":"Fun Fact 1",
+        "Question":"Which country is the birthplace of chess?",
+        "Answer":"India",
+        "Options":"China;Egypt;Greece;Persia"
+    },
+    {
+        "Country":"India",
+        "Round":5,
+        "Type":"Fun Fact 2\/Niche",
+        "Question":"What is the name of the river considered most sacred in India?",
+        "Answer":"Ganges",
+        "Options":"Indus River;Brahmaputra River;Yamuna River;Godavari River"
+    },
+    {
+        "Country":"Russia",
+        "Round":1,
+        "Type":"Easy (flag\/location)",
+        "Question":"What are the three colors of the Russian flag, from top to bottom?",
+        "Answer":"White Blue Red",
+        "Options":"Red White Blue;Blue White Red;White Red Blue;Red Blue White"
+    },
+    {
+        "Country":"Russia",
+        "Round":2,
+        "Type":"Medium (capital\/GDP)",
+        "Question":"What is the capital of Russia?",
+        "Answer":"Moscow",
+        "Options":"Saint Petersburg;Novosibirsk;Yekaterinburg;Kazan"
+    },
+    {
+        "Country":"Russia",
+        "Round":3,
+        "Type":"Culture",
+        "Question":"What is the name of the traditional Russian folk instrument with a triangular body and three strings?",
+        "Answer":"Balalaika",
+        "Options":"Accordion;Domra;Gusli;Oboe"
+    },
+    {
+        "Country":"Russia",
+        "Round":4,
+        "Type":"Fun Fact 1",
+        "Question":"Which country has the longest total border length in the world?",
+        "Answer":"Russia",
+        "Options":"China;Canada;USA;Brazil"
+    },
+    {
+        "Country":"Russia",
+        "Round":5,
+        "Type":"Fun Fact 2\/Niche",
+        "Question":"What is the name of the deepest lake in the world, located in Russia?",
+        "Answer":"Lake Baikal",
+        "Options":"Lake Superior;Lake Victoria;Caspian Sea;Lake Michigan"
+    },
+    {
+        "Country":"Italy",
+        "Round":1,
+        "Type":"Easy (flag\/location)",
+        "Question":"What are the three colors of the Italian flag, from left to right?",
+        "Answer":"Green White Red",
+        "Options":"Red White Green;White Green Red;Green Red White;Red Green White"
+    },
+    {
+        "Country":"Italy",
+        "Round":2,
+        "Type":"Medium (capital\/GDP)",
+        "Question":"What is the capital of Italy?",
+        "Answer":"Rome",
+        "Options":"Milan;Naples;Florence;Venice"
+    },
+    {
+        "Country":"Italy",
+        "Round":3,
+        "Type":"Culture",
+        "Question":"What is the name of the famous leaning tower located in Italy?",
+        "Answer":"Leaning Tower",
+        "Options":"Colosseum;Pantheon;St. Peter's Basilica;Milan Cathedral"
+    },
+    {
+        "Country":"Italy",
+        "Round":4,
+        "Type":"Fun Fact 1",
+        "Question":"Which country is considered the birthplace of pizza?",
+        "Answer":"Italy",
+        "Options":"Greece;USA;France;Spain"
+    },
+    {
+        "Country":"Italy",
+        "Round":5,
+        "Type":"Fun Fact 2\/Niche",
+        "Question":"What is the name of the active stratovolcano located in Sicily, Italy?",
+        "Answer":"Mount Etna",
+        "Options":"Mount Vesuvius;Mount Stromboli;Gran Sasso;Monte Cimone"
+    },
+    {
+        "Country":"England",
+        "Round":1,
+        "Type":"Easy (flag\/location)",
+        "Question":"What is the name of the primary cross on the flag of England?",
+        "Answer":"St. George's Cross",
+        "Options":"St. Andrew's Cross;St. Patrick's Cross;Union Cross;St. David's Cross"
+    },
+    {
+        "Country":"England",
+        "Round":2,
+        "Type":"Medium (capital\/GDP)",
+        "Question":"What is the capital of England?",
+        "Answer":"London",
+        "Options":"Manchester;Birmingham;Liverpool;Bristol"
+    },
+    {
+        "Country":"England",
+        "Round":3,
+        "Type":"Culture",
+        "Question":"What is the name of the famous clock tower located next to the Houses of Parliament in London?",
+        "Answer":"Big Ben",
+        "Options":"Tower of London;Westminster Abbey;Buckingham Palace;St. Paul's Cathedral"
+    },
+    {
+        "Country":"England",
+        "Round":4,
+        "Type":"Fun Fact 1",
+        "Question":"Which country is the birthplace of William Shakespeare?",
+        "Answer":"England",
+        "Options":"France;Italy;Spain;Germany"
+    },
+    {
+        "Country":"England",
+        "Round":5,
+        "Type":"Fun Fact 2\/Niche",
+        "Question":"What is the name of the prehistoric monument in Wiltshire, England, consisting of a ring of standing stones?",
+        "Answer":"Stonehenge",
+        "Options":"Avebury;Castlerigg;Woodhenge;Maeshowe"
+    },
+    {
+        "Country":"France",
+        "Round":1,
+        "Type":"Easy (flag\/location)",
+        "Question":"What are the three colors of the French flag, from left to right?",
+        "Answer":"Blue White Red",
+        "Options":"Red White Blue;White Blue Red;Blue Red White;Red Blue White"
+    },
+    {
+        "Country":"France",
+        "Round":2,
+        "Type":"Medium (capital\/GDP)",
+        "Question":"What is the capital of France?",
+        "Answer":"Paris",
+        "Options":"Marseille;Lyon;Toulouse;Nice"
+    },
+    {
+        "Country":"France",
+        "Round":3,
+        "Type":"Culture",
+        "Question":"What is the name of the famous art museum in Paris that houses the Mona Lisa?",
+        "Answer":"Louvre",
+        "Options":"Mus\u00e9e d'Orsay;Centre Pompidou;Mus\u00e9e Rodin;Palace of Versailles"
+    },
+    {
+        "Country":"France",
+        "Round":4,
+        "Type":"Fun Fact 1",
+        "Question":"Which country is credited with inventing the hot air balloon?",
+        "Answer":"France",
+        "Options":"USA;China;Germany;Italy"
+    },
+    {
+        "Country":"France",
+        "Round":5,
+        "Type":"Fun Fact 2\/Niche",
+        "Question":"What is the name of the highest mountain in Western Europe, located in France and Italy?",
+        "Answer":"Mont Blanc",
+        "Options":"Matterhorn;Jungfrau;Eiger;Dufourspitze"
+    },
+    {
+        "Country":"South Africa",
+        "Round":1,
+        "Type":"Easy (flag\/location)",
+        "Question":"How many colors are there on the flag of South Africa?",
+        "Answer":"Six",
+        "Options":"Four;Five;Seven;Eight"
+    },
+    {
+        "Country":"South Africa",
+        "Round":2,
+        "Type":"Medium (capital\/GDP)",
+        "Question":"What are the three capital cities of South Africa?",
+        "Answer":"Pretoria, Cape Town, Johannesburg",
+        "Options":"Durban;Port Elizabeth;Soweto"
+    },
+    {
+        "Country":"South Africa",
+        "Round":3,
+        "Type":"Culture",
+        "Question":"What is the name of the former policy of racial segregation and discrimination enforced by the National Party government in South Africa?",
+        "Answer":"Apartheid",
+        "Options":"Segregation;Desegregation;Colonialism;Nationalism"
+    },
+    {
+        "Country":"South Africa",
+        "Round":4,
+        "Type":"Fun Fact 1",
+        "Question":"Which country is home to the 'Big Five' game animals?",
+        "Answer":"South Africa",
+        "Options":"Kenya;Tanzania;Botswana;Namibia"
+    },
+    {
+        "Country":"South Africa",
+        "Round":5,
+        "Type":"Fun Fact 2\/Niche",
+        "Question":"What is the name of the mountain range that runs for over 1,000 kilometers along the eastern escarpment of South Africa?",
+        "Answer":"Drakensberg",
+        "Options":"Atlas Mountains;Andes Mountains;Himalayas;Rocky Mountains"
+    },
+    {
+        "Country":"Nigeria",
+        "Round":1,
+        "Type":"Easy (flag\/location)",
+        "Question":"What are the two colors on the flag of Nigeria?",
+        "Answer":"Green and White",
+        "Options":"Red and White;Black and Yellow;Blue and White;Green and Yellow"
+    },
+    {
+        "Country":"Nigeria",
+        "Round":2,
+        "Type":"Medium (capital\/GDP)",
+        "Question":"What is the capital of Nigeria?",
+        "Answer":"Abuja",
+        "Options":"Lagos;Kano;Ibadan;Port Harcourt"
+    },
+    {
+        "Country":"Nigeria",
+        "Round":3,
+        "Type":"Culture",
+        "Question":"What is the name of the most widely spoken indigenous language in Nigeria?",
+        "Answer":"Hausa",
+        "Options":"Yoruba;Igbo;Fulani;Kanuri"
+    },
+    {
+        "Country":"Nigeria",
+        "Round":4,
+        "Type":"Fun Fact 1",
+        "Question":"Which African country has the largest population?",
+        "Answer":"Nigeria",
+        "Options":"Egypt;Ethiopia;South Africa;Algeria"
+    },
+    {
+        "Country":"Nigeria",
+        "Round":5,
+        "Type":"Fun Fact 2\/Niche",
+        "Question":"What is the name of the large rock formation located in Abuja, Nigeria, that is a prominent landmark?",
+        "Answer":"Zuma Rock",
+        "Options":"Olumo Rock;Aso Rock;Chad Basin Rock;Gurara Falls Rock"
+    },
+    {
+        "Country":"Egypt",
+        "Round":1,
+        "Type":"Easy (flag\/location)",
+        "Question":"What animal is featured on the national emblem of Egypt?",
+        "Answer":"Eagle of Saladin",
+        "Options":"Lion;Falcon;Scarab Beetle;Camel"
+    },
+    {
+        "Country":"Egypt",
+        "Round":2,
+        "Type":"Medium (capital\/GDP)",
+        "Question":"What is the capital of Egypt?",
+        "Answer":"Cairo",
+        "Options":"Alexandria;Giza;Luxor;Aswan"
+    },
+    {
+        "Country":"Egypt",
+        "Round":3,
+        "Type":"Culture",
+        "Question":"What is the name of the ancient writing system used in Egypt?",
+        "Answer":"Hieroglyphics",
+        "Options":"Cuneiform;Alphabet;Ideograms;Runes"
+    },
+    {
+        "Country":"Egypt",
+        "Round":4,
+        "Type":"Fun Fact 1",
+        "Question":"Which country is home to the only remaining ancient Wonder of the World, the Great Pyramid of Giza?",
+        "Answer":"Egypt",
+        "Options":"Greece;Italy;Iraq;Jordan"
+    },
+    {
+        "Country":"Egypt",
+        "Round":5,
+        "Type":"Fun Fact 2\/Niche",
+        "Question":"What is the name of the longest river in the world, which flows through Egypt?",
+        "Answer":"Nile",
+        "Options":"Amazon River;Yangtze River;Mississippi River;Danube River"
+    },
+    {
+        "Country":"Brazil",
+        "Round":1,
+        "Type":"Easy (flag\/location)",
+        "Question":"What color is the band that crosses the Brazilian flag diagonally?",
+        "Answer":"White",
+        "Options":"Yellow;Blue;Green;Red"
+    },
+    {
+        "Country":"Brazil",
+        "Round":2,
+        "Type":"Medium (capital\/GDP)",
+        "Question":"What is the capital of Brazil?",
+        "Answer":"Bras\u00edlia",
+        "Options":"Rio de Janeiro;S\u00e3o Paulo;Salvador;Fortaleza"
+    },
+    {
+        "Country":"Brazil",
+        "Round":3,
+        "Type":"Culture",
+        "Question":"What is the name of the famous carnival celebration held annually in Brazil?",
+        "Answer":"Rio Carnival",
+        "Options":"Mardi Gras;Oktoberfest;Holi;Day of the Dead"
+    },
+    {
+        "Country":"Brazil",
+        "Round":4,
+        "Type":"Fun Fact 1",
+        "Question":"Which country is the largest producer of coffee in the world?",
+        "Answer":"Brazil",
+        "Options":"Vietnam;Colombia;Indonesia;Ethiopia"
+    },
+    {
+        "Country":"Brazil",
+        "Round":5,
+        "Type":"Fun Fact 2\/Niche",
+        "Question":"What is the name of the largest rainforest in the world, a significant portion of which is located in Brazil?",
+        "Answer":"Amazon",
+        "Options":"Congo Rainforest;Daintree Rainforest;Valdivian Temperate Rainforest;Southeast Asian Rainforest"
+    },
+    {
+        "Country":"Argentina",
+        "Round":1,
+        "Type":"Easy (flag\/location)",
+        "Question":"What is the name of the symbol in the center of the Argentinian flag?",
+        "Answer":"Sun of May",
+        "Options":"Inca Sun;Aztec Sun;Mayflower;Southern Cross"
+    },
+    {
+        "Country":"Argentina",
+        "Round":2,
+        "Type":"Medium (capital\/GDP)",
+        "Question":"What is the capital of Argentina?",
+        "Answer":"Buenos Aires",
+        "Options":"C\u00f3rdoba;Rosario;Mendoza;La Plata"
+    },
+    {
+        "Country":"Argentina",
+        "Round":3,
+        "Type":"Culture",
+        "Question":"What is the name of the passionate partner dance that originated in Argentina?",
+        "Answer":"Tango",
+        "Options":"Salsa;Flamenco;Waltz;Foxtrot"
+    },
+    {
+        "Country":"Argentina",
+        "Round":4,
+        "Type":"Fun Fact 1",
+        "Question":"Which country is the birthplace of Lionel Messi?",
+        "Answer":"Argentina",
+        "Options":"Brazil;Spain;Portugal;Uruguay"
+    },
+    {
+        "Country":"Argentina",
+        "Round":5,
+        "Type":"Fun Fact 2\/Niche",
+        "Question":"What is the name of the highest mountain in the Americas, located in Argentina?",
+        "Answer":"Mount Aconcagua",
+        "Options":"Mount Everest;Denali;Mount Kilimanjaro;Mount Elbrus"
+    },
+    {
+        "Country":"Mexico",
+        "Round":1,
+        "Type":"Easy (flag\/location)",
+        "Question":"What animal is featured on the Mexican flag?",
+        "Answer":"Golden Eagle",
+        "Options":"Jaguar;Serpent;Quetzal;Cactus"
+    },
+    {
+        "Country":"Mexico",
+        "Round":2,
+        "Type":"Medium (capital\/GDP)",
+        "Question":"What is the capital of Mexico?",
+        "Answer":"Mexico City",
+        "Options":"Guadalajara;Monterrey;Puebla;Tijuana"
+    },
+    {
+        "Country":"Mexico",
+        "Round":3,
+        "Type":"Culture",
+        "Question":"What is the name of the ancient civilization that built the city of Teotihuacan in Mexico?",
+        "Answer":"Aztec",
+        "Options":"Maya;Toltec;Olmec;Zapotec"
+    },
+    {
+        "Country":"Mexico",
+        "Round":4,
+        "Type":"Fun Fact 1",
+        "Question":"Which country is believed to have domesticated corn (maize)?",
+        "Answer":"Mexico",
+        "Options":"USA;Peru;China;India"
+    },
+    {
+        "Country":"Mexico",
+        "Round":5,
+        "Type":"Fun Fact 2\/Niche",
+        "Question":"What is the name of the peninsula in southeastern Mexico that separates the Gulf of Mexico from the Caribbean Sea?",
+        "Answer":"Yucat\u00e1n",
+        "Options":"Baja California Peninsula;Florida Peninsula;Alaska Peninsula;Arabian Peninsula"
+    },
+    {
+        "Country":"USA",
+        "Round":1,
+        "Type":"Easy (flag\/location)",
+        "Question":"How many stars are on the flag of the USA?",
+        "Answer":"50",
+        "Options":"48;51;52;53"
+    },
+    {
+        "Country":"USA",
+        "Round":2,
+        "Type":"Medium (capital\/GDP)",
+        "Question":"What is the capital of the United States of America?",
+        "Answer":"Washington D.C.",
+        "Options":"New York City;Los Angeles;Chicago;Houston"
+    },
+    {
+        "Country":"USA",
+        "Round":3,
+        "Type":"Culture",
+        "Question":"What is the name of the annual film awards ceremony in the United States?",
+        "Answer":"Oscars",
+        "Options":"Golden Globe Awards;Emmy Awards;Grammy Awards;Tony Awards"
+    },
+    {
+        "Country":"USA",
+        "Round":4,
+        "Type":"Fun Fact 1",
+        "Question":"Which country invented the light bulb?",
+        "Answer":"USA",
+        "Options":"Germany;France;United Kingdom;Italy"
+    },
+    {
+        "Country":"USA",
+        "Round":5,
+        "Type":"Fun Fact 2\/Niche",
+        "Question":"What is the name of the deepest canyon in the United States, located in Arizona?",
+        "Answer":"Grand Canyon",
+        "Options":"Bryce Canyon;Zion Canyon;Antelope Canyon;Death Valley"
+    },
+    {
+        "Country":"Canada",
+        "Round":1,
+        "Type":"Easy (flag\/location)",
+        "Question":"What type of leaf is featured on the Canadian flag?",
+        "Answer":"Maple Leaf",
+        "Options":"Oak Leaf;Pine Leaf;Birch Leaf;Aspen Leaf"
+    },
+    {
+        "Country":"Canada",
+        "Round":2,
+        "Type":"Medium (capital\/GDP)",
+        "Question":"What is the capital of Canada?",
+        "Answer":"Ottawa",
+        "Options":"Toronto;Montreal;Vancouver;Calgary"
+    },
+    {
+        "Country":"Canada",
+        "Round":3,
+        "Type":"Culture",
+        "Question":"What is the national winter sport of Canada?",
+        "Answer":"Ice Hockey",
+        "Options":"Skiing;Snowboarding;Curling;Figure Skating"
+    },
+    {
+        "Country":"Canada",
+        "Round":4,
+        "Type":"Fun Fact 1",
+        "Question":"Which country has the longest coastline in the world?",
+        "Answer":"Canada",
+        "Options":"Russia;USA;Indonesia;Australia"
+    },
+    {
+        "Country":"Canada",
+        "Round":5,
+        "Type":"Fun Fact 2\/Niche",
+        "Question":"What is the name of the group of islands in northern Canada, largely within the Arctic Circle?",
+        "Answer":"Arctic Archipelago",
+        "Options":"Aleutian Islands;Hawaiian Islands;Gal\u00e1pagos Islands;British Isles"
+    },
+    {
+        "Country":"Greenland",
+        "Round":1,
+        "Type":"Easy (flag\/location)",
+        "Question":"What are the two colors on the flag of Greenland?",
+        "Answer":"Red and White",
+        "Options":"Blue and White;Green and White;Black and White;Yellow and White"
+    },
+    {
+        "Country":"Greenland",
+        "Round":2,
+        "Type":"Medium (capital\/GDP)",
+        "Question":"What is the capital of Greenland?",
+        "Answer":"Nuuk",
+        "Options":"Sisimiut;Ilulissat;Aasiaat;Qaqortoq"
+    },
+    {
+        "Country":"Greenland",
+        "Round":3,
+        "Type":"Culture",
+        "Question":"What is the name of the indigenous people of Greenland?",
+        "Answer":"Inuit",
+        "Options":"Sami;Yupik;Aleut;M\u00e9tis"
+    },
+    {
+        "Country":"Greenland",
+        "Round":4,
+        "Type":"Fun Fact 1",
+        "Question":"Which is the world's largest island?",
+        "Answer":"Greenland",
+        "Options":"Australia;Borneo;Madagascar;Baffin Island"
+    },
+    {
+        "Country":"Greenland",
+        "Round":5,
+        "Type":"Fun Fact 2\/Niche",
+        "Question":"What is the name of the massive ice sheet that covers most of Greenland?",
+        "Answer":"Greenland Ice Sheet",
+        "Options":"Antarctic Ice Sheet;Vatnaj\u00f6kull;Patagonian Ice Fields;Cordilleran Ice Sheet"
+    },
+    {
+        "Country":"Norway",
+        "Round":1,
+        "Type":"Easy (flag\/location)",
+        "Question":"What is the color of the inner cross on the flag of Norway?",
+        "Answer":"White",
+        "Options":"Red;Blue;Yellow;Black"
+    },
+    {
+        "Country":"Norway",
+        "Round":2,
+        "Type":"Medium (capital\/GDP)",
+        "Question":"What is the capital of Norway?",
+        "Answer":"Oslo",
+        "Options":"Bergen;Trondheim;Stavanger;Drammen"
+    },
+    {
+        "Country":"Norway",
+        "Round":3,
+        "Type":"Culture",
+        "Question":"What are the names of the mythical creatures often associated with Norwegian folklore?",
+        "Answer":"Trolls",
+        "Options":"Elves;Gnomes;Fairies;Leprechauns"
+    },
+    {
+        "Country":"Norway",
+        "Round":4,
+        "Type":"Fun Fact 1",
+        "Question":"Which country awards the Nobel Peace Prize?",
+        "Answer":"Norway",
+        "Options":"Sweden;Switzerland;Denmark;Finland"
+    },
+    {
+        "Country":"Norway",
+        "Round":5,
+        "Type":"Fun Fact 2\/Niche",
+        "Question":"What is the name of the system of deep, narrow and elongated sea or lake basins with steep land on three sides, formed by glacial erosion, found extensively in Norway?",
+        "Answer":"Fjord",
+        "Options":"Sound;Strait;Estuary;Lagoon"
+    },
+    {
+        "Country":"Indonesia",
+        "Round":1,
+        "Type":"Easy (flag\/location)",
+        "Question":"What are the two colors on the flag of Indonesia?",
+        "Answer":"Red and White",
+        "Options":"Blue and Yellow;Green and White;Black and Red;Yellow and Blue"
+    },
+    {
+        "Country":"Indonesia",
+        "Round":2,
+        "Type":"Medium (capital\/GDP)",
+        "Question":"What is the capital of Indonesia?",
+        "Answer":"Jakarta",
+        "Options":"Surabaya;Bandung;Medan;Semarang"
+    },
+    {
+        "Country":"Indonesia",
+        "Round":3,
+        "Type":"Culture",
+        "Question":"What is the name of the traditional Indonesian art of wax-resist dyeing applied to whole cloth?",
+        "Answer":"Batik",
+        "Options":"Ikat;Tie-dye;Embroidery;Weaving"
+    },
+    {
+        "Country":"Indonesia",
+        "Round":4,
+        "Type":"Fun Fact 1",
+        "Question":"Which country is the world's largest archipelago?",
+        "Answer":"Indonesia",
+        "Options":"Philippines;Japan;Greece;Maldives"
+    },
+    {
+        "Country":"Indonesia",
+        "Round":5,
+        "Type":"Fun Fact 2\/Niche",
+        "Question":"What is the name of the largest lizard in the world, found on several Indonesian islands?",
+        "Answer":"Komodo",
+        "Options":"Saltwater Crocodile;Green Anaconda;African Rock Python;Gila Monster"
+    }
+]
