@@ -1,4 +1,6 @@
 #include "mainwindow.h"
+#include "mappage.h"
+#include "tutorialpage.h"
 #include "ui_mainwindow.h"
 
 MainWindow::MainWindow(QWidget *parent)
@@ -6,6 +8,7 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    this->setWindowTitle("Geo Breaker");
     QPalette palette = this->palette();
     palette.setColor(QPalette::Window, QColor("#f5f5dc")); // beige
     this->setAutoFillBackground(true);
@@ -21,6 +24,16 @@ MainWindow::MainWindow(QWidget *parent)
     // Example: pushButton_2 -> pastel pink
     ui->Tutorial->setStyleSheet("QPushButton { background-color: #ffb6c1; color: black; border-radius: 8px; padding: 6px; }");
 
+    connect(ui->Tutorial, &QPushButton::clicked, this, [=]() {
+        TutorialPage tutorial(this);
+        tutorial.exec();  // Opens as modal pop-up
+    });
+
+    connect(ui->play, &QPushButton::clicked, this, [=]() {
+        MapPage *mapWindow = new MapPage();
+        mapWindow->show();   // show the new map window
+        this->close();       // close the current main menu window
+    });
 
 }
 
