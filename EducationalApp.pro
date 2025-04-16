@@ -62,8 +62,6 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     mappage.cpp \
-    paddle.cpp \
-    physicsmanager.cpp \
     tutorialpage.cpp \
     wall.cpp
 
@@ -117,12 +115,9 @@ HEADERS += \
     Box2D/Rope/b2Rope.h \
     ball.h \
     brick.h \
-    gameobject.h \
     gamepage.h \
     mainwindow.h \
     mappage.h \
-    paddle.h \
-    physicsmanager.h \
     tutorialpage.h \
     wall.h
 

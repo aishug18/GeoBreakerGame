@@ -15,14 +15,10 @@ public:
     void resetPosition();   // Reset the position of the ball to startPosition
     b2Body* getBody() const { return body; }
 
-
-    void launch();
-    //void handleCollision(GameObject* other);
-
 private:
     b2Body* body;   // Ball's physics body
     QPointF startPosition;   // Start position of ball, adjust values accordingly
-    QPixmap sprite;
+    float radius = 15.0f;
 };
 
 #endif // BALL_H

@@ -209,8 +209,8 @@ void GamePage::mouseReleaseEvent(QMouseEvent *event) {
     QPointF direction = aimEnd - aimStart;
 
     // Scale direction for speed adjustment
-    float speed = 500.0f;    // not changing the speed, Adjust this value to control launch speed
-    QPointF velocity(direction.x() * speed, direction.y() * speed);
+    float speed = 10000.0f;    // not changing the speed, Adjust this value to control launch speed
+    QPointF velocity(direction.x(), direction.y());
 
     // Apply velocity to the ball
     ball->setVelocity(velocity);

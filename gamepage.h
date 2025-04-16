@@ -7,12 +7,10 @@
 #include <QMediaPlayer>
 #include <QAudioOutput>
 #include <vector>
+#include <QMouseEvent>
 #include "ball.h"
 #include "brick.h"
 #include "wall.h"
-
-#include "paddle.h"
-#include "physicsmanager.h"
 
 namespace Ui {
 class GamePage;
@@ -59,9 +57,7 @@ private:
 
 
     // other stuff, do we need??
-    PhysicsManager* physicsManager = nullptr;
     QTimer* gameLoopTimer = nullptr;
-    Paddle* paddle = nullptr;
     QTimer* gameTimer = nullptr;
     //ContactListener* contactListener = nullptr;
     int remainingTime = 15;

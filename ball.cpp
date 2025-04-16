@@ -11,11 +11,11 @@ Ball::Ball(b2World* world) : startPosition(400.0f, 600.0f) {
     body = world->CreateBody(&bodyDef);
 
     b2CircleShape shape;
-    shape.m_radius = 15.0f;  // Ball radius, adjust accordingly
+    shape.m_radius = radius;  // Ball radius, adjust accordingly
 
     b2FixtureDef fixtureDef;
     fixtureDef.shape = &shape;
-    fixtureDef.density = 1.0f;
+    fixtureDef.density = 0.1f;
     fixtureDef.friction = 0.1f;
     fixtureDef.restitution = 1.0f;  // Bouncy ball
     body->CreateFixture(&fixtureDef);
@@ -30,36 +30,24 @@ Ball::~Ball() {
 void Ball::draw(QPainter& painter) {
     // Render ball based on physics body's position
     QPointF position(body->GetPosition().x, body->GetPosition().y);
-    painter.setPen(Qt::black);
-    painter.setBrush(Qt::red);  // Adjust color of ball
-    painter.drawEllipse(position, 15.0, 15.0);  // adjust radius if needed
+
+    QRadialGradient gradient(position, radius);
+    gradient.setColorAt(0, QColor(255, 255, 255));
+    gradient.setColorAt(0.3, Qt::red);
+    gradient.setColorAt(1, Qt::darkRed);
+
+    painter.save();
+    painter.setBrush(gradient);
+    painter.setPen(Qt::NoPen);
+    painter.drawEllipse(position, radius, radius);
+    painter.restore();
 }
 
 void Ball::setVelocity(const QPointF& velocity) {
-    if(body) {
-        body->SetLinearVelocity(b2Vec2(velocity.x(), velocity.y()));
-    }
+    body->SetLinearVelocity(b2Vec2(velocity.x(), velocity.y()));
 }
 
 void Ball::resetPosition() {
     body->SetTransform(b2Vec2(startPosition.x(), startPosition.y()), 0.0f);
     body->SetLinearVelocity(b2Vec2(0.0f, 0.0f));    // Stop movement
 }
-
-
-
-void Ball::launch() {
-    if (body) {
-        body->ApplyLinearImpulse(
-            b2Vec2(0.5f, -5.0f),
-            body->GetWorldCenter(),
-            true
-            );
-    }
-}
-
-// void Ball::handleCollision(GameObject* other) {
-//     // Collision handling logic
-//     other->getBody();
-// }
-
