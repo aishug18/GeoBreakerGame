@@ -2,6 +2,8 @@
 #define MAPPAGE_H
 
 #include <QWidget>
+#include <QMediaPlayer>
+#include <QAudioOutput>
 
 namespace Ui {
 class MapPage;
@@ -17,6 +19,11 @@ public:
 
 private:
     Ui::MapPage *ui;
+    QMediaPlayer *mapMusicPlayer;
+    QAudioOutput *mapAudioOutput;
+
+    QMediaPlayer *clickPlayer;
+    QAudioOutput *clickAudio;
 
 private slots:
     void on_enterGameButton_clicked();

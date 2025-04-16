@@ -4,5 +4,9 @@
         <file>assets/world_map.jpg</file>
         <file>assets/wood_button.png</file>
         <file>assets/menu_background.jpg</file>
+        <file>assets/menu_music.mp3</file>
+        <file>assets/map_music.mp3</file>
+        <file>assets/button_click_sound_1.mp3</file>
+        <file>assets/button_click_sound_2.mp3</file>
     </qresource>
 </RCC>
