@@ -11,7 +11,7 @@ Ball::Ball(b2World* world) : startPosition(400.0f, 600.0f) {
     body = world->CreateBody(&bodyDef);
 
     b2CircleShape shape;
-    shape.m_radius = 10.0f;  // Ball radius, adjust accordingly
+    shape.m_radius = 15.0f;  // Ball radius, adjust accordingly
 
     b2FixtureDef fixtureDef;
     fixtureDef.shape = &shape;
@@ -30,8 +30,9 @@ Ball::~Ball() {
 void Ball::draw(QPainter& painter) {
     // Render ball based on physics body's position
     QPointF position(body->GetPosition().x, body->GetPosition().y);
+    painter.setPen(Qt::black);
     painter.setBrush(Qt::red);  // Adjust color of ball
-    painter.drawEllipse(position, 10.0, 10.0);  // adjust radius if needed
+    painter.drawEllipse(position, 15.0, 15.0);  // adjust radius if needed
 }
 
 void Ball::setVelocity(const QPointF& velocity) {

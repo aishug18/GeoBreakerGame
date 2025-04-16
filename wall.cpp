@@ -13,6 +13,9 @@ Wall::Wall(b2World* world, const QRectF& rect) {
     fixtureDef.shape = &shape;
     fixtureDef.restitution = 1.0f;  // Bouncy walls
     body->CreateFixture(&fixtureDef);
+
+    sprite.load(":/images/assets/wall_sprite.jpg");
+
 }
 
 Wall::~Wall() {
@@ -35,12 +38,14 @@ void Wall::draw(QPainter& painter) {
         float halfHeight = shape->m_vertices[2].y;   // half-height from the shape's vertices
 
         // Now draw the wall
-        painter.setBrush(Qt::blue);    // change color as needed
-        painter.drawRect(QRectF(
+
+        QRect rect(
             position.x() - halfWidth,   // left
             position.y() - halfHeight,  // top
             halfWidth * 2,              // width
-            halfHeight * 2));           // height
+            halfHeight * 2);           // height
+
+        painter.drawPixmap(rect, sprite);   // stretches a lot
     }
 }
 

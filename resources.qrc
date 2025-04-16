@@ -8,5 +8,7 @@
         <file>assets/map_music.mp3</file>
         <file>assets/button_click_sound_1.mp3</file>
         <file>assets/button_click_sound_2.mp3</file>
+        <file>assets/wall_sprite.jpg</file>
+        <file>assets/game_background.jpg</file>
     </qresource>
 </RCC>

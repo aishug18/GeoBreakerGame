@@ -15,6 +15,8 @@ Brick::Brick(b2World* world, const QPointF& position, const QString& answer, boo
     fixtureDef.shape = &shape;
     fixtureDef.density = 1.0f;
     body->CreateFixture(&fixtureDef);
+
+    //sprite.load(":/images/assets/wall_sprite.jpg");
 }
 
 Brick::~Brick() {

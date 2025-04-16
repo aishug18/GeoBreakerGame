@@ -1,5 +1,7 @@
 #include "gamepage.h"
 #include "ui_gamepage.h"
+#include "mainwindow.h"
+#include "mappage.h"
 
 GamePage::GamePage(QWidget *parent)
     : QWidget(parent)
@@ -9,11 +11,50 @@ GamePage::GamePage(QWidget *parent)
 {
     ui->setupUi(this);
     this->setWindowTitle("Game");
+
     setupObjects();
 
     ui->scoreLabel->setText(QString::number(score));
 
     connect(this, &GamePage::scoreChanged, ui->scoreLabel, QOverload<int>::of(&QLabel::setNum));
+
+    // Set image for buttons
+    QString buttonStyle = R"(
+        QPushButton {
+            border-image: url(:/images/assets/wood_button.png);
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+            padding: 10px;
+        }
+        QPushButton:hover {
+            opacity: 0.9;
+        }
+    )";
+    ui->home->setStyleSheet(buttonStyle);
+    ui->map->setStyleSheet(buttonStyle);
+
+    // Connect buttons to respective windows
+    connect(ui->home, &QPushButton::clicked, this, &GamePage::homeButtonClicked);
+    connect(ui->map, &QPushButton::clicked, this, &GamePage::mapButtonClicked);
+
+    // Set up the audio output and player for background music
+    gameAudioOutput = new QAudioOutput(this);
+    gameMusicPlayer = new QMediaPlayer(this);
+    gameMusicPlayer->setAudioOutput(gameAudioOutput);
+
+    // Load and play music
+    gameMusicPlayer->setSource(QUrl("qrc:/images/assets/menu_music.mp3"));  // change source
+    gameAudioOutput->setVolume(0.1);  // volume
+    gameMusicPlayer->play();
+    gameMusicPlayer->setLoops(QMediaPlayer::Infinite);
+
+    // Audio for clicking buttons
+    clickAudio = new QAudioOutput(this);
+    clickPlayer = new QMediaPlayer(this);
+    clickPlayer->setAudioOutput(clickAudio);
+    clickPlayer->setSource(QUrl("qrc:/images/assets/button_click_sound_1.mp3"));
+    clickAudio->setVolume(0.5);
 
     // Timer for updating physics and rendering game objects
     QTimer* timer = new QTimer(this);
@@ -115,7 +156,7 @@ void GamePage::drawGame(QPainter& painter) {
 
     // Draw the aim line
     if(!aimStart.isNull() && !aimEnd.isNull()) {
-        painter.setPen(QPen(Qt::blue, 2));  // adjust color as needed
+        painter.setPen(QPen(Qt::white, 2));  // adjust color as needed
         painter.drawLine(aimStart, aimEnd);
 
         // Draw reflected aim line for bouncing
@@ -184,6 +225,22 @@ void GamePage::mouseReleaseEvent(QMouseEvent *event) {
     aimEnd = QPointF();
 
     this->update();// Trigger repaint to clear the aim line
+}
+
+void GamePage::homeButtonClicked() {
+    MainWindow *mainMenu = new MainWindow();
+    clickPlayer->play();  // Play click sound 1
+    gameMusicPlayer->stop(); // Stop game page music
+    mainMenu->show();
+    this->close();  // Close the current GamePage
+}
+
+void GamePage::mapButtonClicked() {
+    MapPage *mapWindow = new MapPage();
+    clickPlayer->play();  // Play click sound 1
+    gameMusicPlayer->stop(); // Stop game page music
+    mapWindow->show();
+    this->close();  // Close the game window
 }
 
 void GamePage::updateTimer() {

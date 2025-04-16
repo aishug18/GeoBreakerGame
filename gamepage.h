@@ -4,11 +4,14 @@
 #include <QWidget>
 #include <Box2D/Box2D.h>
 #include <QTimer>
+#include <QMediaPlayer>
+#include <QAudioOutput>
 #include <vector>
-#include "paddle.h"
 #include "ball.h"
 #include "brick.h"
 #include "wall.h"
+
+#include "paddle.h"
 #include "physicsmanager.h"
 
 namespace Ui {
@@ -49,6 +52,11 @@ private:
     QPointF aimEnd; // Aim end point
     int score;  // Player's score
 
+    QMediaPlayer *gameMusicPlayer;
+    QAudioOutput *gameAudioOutput;
+
+    QMediaPlayer *clickPlayer;
+    QAudioOutput *clickAudio;
 
     // other stuff, do we need??
     PhysicsManager* physicsManager = nullptr;
@@ -70,6 +78,10 @@ private:
 
 signals:
     void scoreChanged(int newScore);
+
+private slots:
+    void homeButtonClicked();
+    void mapButtonClicked();
 };
 
 #endif // GAMEPAGE_H

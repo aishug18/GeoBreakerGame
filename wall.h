@@ -22,6 +22,7 @@ public:
 
 private:
     b2Body* body;   // Wall's physics body
+    QPixmap sprite; // Sprite for the wall
 };
 
 #endif // WALL_H

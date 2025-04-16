@@ -22,6 +22,7 @@ public:
 private:
     b2Body* body;   // Ball's physics body
     QPointF startPosition;   // Start position of ball, adjust values accordingly
+    QPixmap sprite;
 };
 
 #endif // BALL_H

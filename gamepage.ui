@@ -15,6 +15,7 @@
   </property>
   <property name="styleSheet">
    <string notr="true">QWidget {
+	/*background-image: url(:/images/assets/game_background.jpg) */
 	background-color: rgb(0, 0, 0);
 }</string>
   </property>
@@ -64,7 +65,7 @@
      <set>Qt::AlignmentFlag::AlignCenter</set>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_2">
+   <widget class="QPushButton" name="map">
     <property name="geometry">
      <rect>
       <x>60</x>
@@ -82,7 +83,7 @@
      <string>Map</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton">
+   <widget class="QPushButton" name="home">
     <property name="geometry">
      <rect>
       <x>60</x>
@@ -121,7 +122,7 @@
 }</string>
     </property>
     <property name="text">
-     <string>_score_</string>
+     <string>0</string>
     </property>
     <property name="alignment">
      <set>Qt::AlignmentFlag::AlignCenter</set>
