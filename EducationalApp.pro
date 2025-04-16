@@ -55,11 +55,16 @@ SOURCES += \
     Box2D/Dynamics/b2World.cpp \
     Box2D/Dynamics/b2WorldCallbacks.cpp \
     Box2D/Rope/b2Rope.cpp \
+    ball.cpp \
+    brick.cpp \
     gamepage.cpp \
     main.cpp \
     mainwindow.cpp \
     mappage.cpp \
-    tutorialpage.cpp
+    paddle.cpp \
+    physicsmanager.cpp \
+    tutorialpage.cpp \
+    wall.cpp
 
 HEADERS += \
     Box2D/Box2D.h \
@@ -109,10 +114,16 @@ HEADERS += \
     Box2D/Dynamics/b2World.h \
     Box2D/Dynamics/b2WorldCallbacks.h \
     Box2D/Rope/b2Rope.h \
+    ball.h \
+    brick.h \
+    gameobject.h \
     gamepage.h \
     mainwindow.h \
     mappage.h \
-    tutorialpage.h
+    paddle.h \
+    physicsmanager.h \
+    tutorialpage.h \
+    wall.h
 
 FORMS += \
     gamepage.ui \
