@@ -11,7 +11,6 @@ GamePage::GamePage(QWidget *parent)
 {
     ui->setupUi(this);
     this->setWindowTitle("Game");
-
     setupObjects();
 
     ui->scoreLabel->setText(QString::number(score));
@@ -91,7 +90,16 @@ void GamePage::setupObjects() {
     // etc
 
     // Create platform
-    // platform = new Platform(world, QPointF(400.0f, 550.0f));
+    b2BodyDef bodyDef;
+    bodyDef.type = b2_staticBody;
+    bodyDef.position.Set(400.0f, 650.0f); // adjust position accordingly
+    platformBody = world->CreateBody(&bodyDef);
+    b2PolygonShape shape;
+    shape.SetAsBox(50.0f, 10.0f); // Platform dimensions, change accordingly
+    b2FixtureDef fixtureDef;
+    fixtureDef.shape = &shape;
+    fixtureDef.density = 1.0f;
+    platformBody->CreateFixture(&fixtureDef);
 }
 
 void GamePage::updatePhysics() {
@@ -152,7 +160,7 @@ void GamePage::drawGame(QPainter& painter) {
     }
 
     // Draw the platform
-    createPlatform(painter);    // maybe do it so you don't make a bunch of objects every time this is called
+    drawPlatform(painter);
 
     // Draw the aim line
     if(!aimStart.isNull() && !aimEnd.isNull()) {
@@ -165,23 +173,10 @@ void GamePage::drawGame(QPainter& painter) {
 
 }
 
-void GamePage::createPlatform(QPainter& painter) {
-    b2BodyDef bodyDef;
-    bodyDef.type = b2_staticBody;
-    bodyDef.position.Set(400.0f, 600.0f); // adjust position accordingly
-    b2Body* platformBody = world->CreateBody(&bodyDef);
-
-    b2PolygonShape shape;
-    shape.SetAsBox(50.0f, 10.0f); // Platform dimensions, change accordingly
-
-    b2FixtureDef fixtureDef;
-    fixtureDef.shape = &shape;
-    fixtureDef.density = 1.0f;
-    platformBody->CreateFixture(&fixtureDef);
-
+void GamePage::drawPlatform(QPainter& painter) {
     QPointF position(platformBody->GetPosition().x, platformBody->GetPosition().y); // the center of the brick
     painter.setBrush(Qt::gray);    // change color as needed
-    painter.drawRect(QRectF(position.x() - 50, position.y() - 10, 100, 20)); // (left, top, width, height)
+    painter.drawRect(QRectF(position.x() - 10, position.y() - 10, 200, 20)); // (left, top, width, height)
 }
 
 

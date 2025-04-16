@@ -47,16 +47,16 @@ private:
     Ball* ball; // Ball object
     std::vector<Brick*> bricks; // List of Brick objects
     std::vector<Wall*> walls;   // Walls of the game
-    // Platform* platform;  // Platform object, where the ball rests (same as Paddle?)
+    b2Body* platformBody;   // Platform object, where the ball rests
     QPointF aimStart;   // Aim start point
     QPointF aimEnd; // Aim end point
     int score;  // Player's score
 
     QMediaPlayer *gameMusicPlayer;
     QAudioOutput *gameAudioOutput;
-
     QMediaPlayer *clickPlayer;
     QAudioOutput *clickAudio;
+
 
     // other stuff, do we need??
     PhysicsManager* physicsManager = nullptr;
@@ -65,7 +65,6 @@ private:
     QTimer* gameTimer = nullptr;
     //ContactListener* contactListener = nullptr;
     int remainingTime = 15;
-
     void incrementScore(int points);
 
 
@@ -74,7 +73,7 @@ private:
     void updatePhysics();   // Simulate physics
     void checkCollision(); // Check collisions between the ball and bricks
     void drawGame(QPainter& painter);   // Render game components
-    void createPlatform(QPainter& painter);  // Create a platform where the ball rests
+    void drawPlatform(QPainter& painter);  // Create a platform where the ball rests
 
 signals:
     void scoreChanged(int newScore);
