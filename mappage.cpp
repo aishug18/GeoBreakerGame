@@ -30,8 +30,35 @@ MapPage::MapPage(QWidget *parent)
     }
 )";
 
+    QString pinStyle = R"(
+    QCommandLinkButton {
+        border: none;
+        background-color: transparent;
+        icon-size: 48px 48px;
+        qproperty-icon: url(:/images/assets/pin.png);
+        qproperty-text: "";
+    }
+    QCommandLinkButton:hover {
+        opacity: 0.9;
+    }
+)";
+
+    QString textBrowserStyle = R"(
+    QTextBrowser {
+        background-image: url(:/images/assets/wood_panel.png);
+        background-repeat: no-repeat;
+        background-position: center;
+        border: none;
+        color: black;
+        font-size: 16px;
+        padding: 40px;
+        font-family: "Segoe UI Emoji", "Noto Color Emoji", "Apple Color Emoji", sans-serif;
+    }
+)";
+
     ui->enterGameButton->setStyleSheet(buttonStyle);
     ui->returnToMenuButton->setStyleSheet(buttonStyle);
+    ui->backToMapButton->setStyleSheet(buttonStyle);
 
     mapAudioOutput = new QAudioOutput(this);
     mapMusicPlayer = new QMediaPlayer(this);
@@ -47,7 +74,36 @@ MapPage::MapPage(QWidget *parent)
     clickPlayer->setSource(QUrl("qrc:/images/assets/button_click_sound_1.mp3"));
     clickAudio->setVolume(0.5);
 
+    ui->commandLinkButton->setStyleSheet(pinStyle);
+    ui->commandLinkButton2->setStyleSheet(pinStyle);
+    ui->commandLinkButton3->setStyleSheet(pinStyle);
+    ui->commandLinkButton4->setStyleSheet(pinStyle);
+    ui->commandLinkButton5->setStyleSheet(pinStyle);
+    ui->commandLinkButton6->setStyleSheet(pinStyle);
+    ui->commandLinkButton7->setStyleSheet(pinStyle);
+    ui->commandLinkButton8->setStyleSheet(pinStyle);
+    ui->commandLinkButton9->setStyleSheet(pinStyle);
+    ui->commandLinkButton10->setStyleSheet(pinStyle);
+    ui->commandLinkButton11->setStyleSheet(pinStyle);
+    ui->commandLinkButton12->setStyleSheet(pinStyle);
+    ui->commandLinkButton13->setStyleSheet(pinStyle);
+    ui->commandLinkButton14->setStyleSheet(pinStyle);
+    ui->commandLinkButton15->setStyleSheet(pinStyle);
+    ui->commandLinkButton16->setStyleSheet(pinStyle);
+    ui->commandLinkButton17->setStyleSheet(pinStyle);
+    ui->commandLinkButton18->setStyleSheet(pinStyle);
+    ui->commandLinkButton19->setStyleSheet(pinStyle);
+    ui->commandLinkButton20->setStyleSheet(pinStyle);
+
     ui->backToMapButton->setVisible(false);
+
+    for (int i = 1; i <= 20; ++i) {
+        QString name = (i == 1) ? "textBrowser" : QString("textBrowser_%1").arg(i);
+        QTextBrowser *browser = this->findChild<QTextBrowser*>(name);
+        if (browser) {
+            browser->setStyleSheet(textBrowserStyle);
+        }
+    }
 
     ui->textBrowser->setVisible(false);
     ui->textBrowser_2->setVisible(false);
