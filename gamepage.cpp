@@ -85,14 +85,17 @@ void GamePage::setupObjects() {
     walls.push_back(new Wall(world, QRectF(770, 0, 30, 800)));    // Right wall
 
     // Create bricks, adjust values as needed
-    bricks.push_back(new Brick(world, QPointF(200, 200), "Answer1", true));
-    bricks.push_back(new Brick(world, QPointF(300, 200), "Answer2", false));
+    bricks.push_back(new Brick(world, QPointF(175, 275), "Answer1", true));
+    bricks.push_back(new Brick(world, QPointF(375, 275), "Answer2", false));
+    bricks.push_back(new Brick(world, QPointF(575, 275), "Answer3", false));
+    bricks.push_back(new Brick(world, QPointF(275, 475), "Answer4", false));
+    bricks.push_back(new Brick(world, QPointF(475, 475), "Answer5", false));
     // etc
 
     // Create platform
     b2BodyDef bodyDef;
     bodyDef.type = b2_staticBody;
-    bodyDef.position.Set(400.0f, 650.0f); // adjust position accordingly
+    bodyDef.position.Set(325.0f, 650.0f); // adjust position accordingly
     platformBody = world->CreateBody(&bodyDef);
     b2PolygonShape shape;
     shape.SetAsBox(50.0f, 10.0f); // Platform dimensions, change accordingly
@@ -205,22 +208,23 @@ void GamePage::mouseMoveEvent(QMouseEvent *event) {
     this->update(); // Trigger repaint to show aim line
 }
 void GamePage::mouseReleaseEvent(QMouseEvent *event) {
-    // Launch the ball
     QPointF direction = aimEnd - aimStart;
 
-    // Scale direction for speed adjustment
-    float speed = 10000.0f;    // not changing the speed, Adjust this value to control launch speed
-    QPointF velocity(direction.x(), direction.y());
+    // Normalize the direction vector
+    float magnitude = std::hypot(direction.x(), direction.y());
+    if (magnitude == 0) return;
 
-    // Apply velocity to the ball
+    QPointF normalizedDir = direction / magnitude;
+
+    // Speed multiplier (increase this value to make the ball go faster)
+    constexpr float speedMultiplier = 250000.0f; // Try values like 250000.0f or 500000.0f
+
+    QPointF velocity = normalizedDir * speedMultiplier;
+
+    // Set the velocity
     ball->setVelocity(velocity);
-
-    // Clear aim line
-    aimStart = QPointF();
-    aimEnd = QPointF();
-
-    this->update();// Trigger repaint to clear the aim line
 }
+
 
 void GamePage::homeButtonClicked() {
     MainWindow *mainMenu = new MainWindow();
