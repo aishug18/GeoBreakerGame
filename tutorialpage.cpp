@@ -7,6 +7,7 @@ TutorialPage::TutorialPage(QWidget *parent)
 {
     ui->setupUi(this);
     this->setWindowTitle("Tutorial");
+    this->showFullScreen();
 }
 
 TutorialPage::~TutorialPage()
