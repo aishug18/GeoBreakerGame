@@ -106,7 +106,7 @@ void GamePage::setupObjects() {
     walls.push_back(new Wall(world, QRectF(770,0,30,800))); // right
 
     // Platform (static)
-    b2BodyDef pd; pd.type = b2_staticBody; pd.position.Set(325,650);
+    b2BodyDef pd; pd.type = b2_staticBody; pd.position.Set(375,700);
     platformBody = world->CreateBody(&pd);
     b2PolygonShape ps; ps.SetAsBox(100,10);
     b2FixtureDef pf; pf.shape = &ps; pf.density=1.0f;
@@ -187,6 +187,20 @@ void GamePage::setupRoundOne() {
 void GamePage::setupCountrySpecificRound() {
     roundState = RoundState::TrueFalse;
     destroyAllBricks();
+
+    // Hide previous labels from round 1
+    QLabel* labels[5] = {
+        ui->label_3,
+        ui->label_4,
+        ui->label_5,
+        ui->label_6,
+        ui->label_7
+    };
+
+    for (QLabel* label : labels) {
+        label->clear();             // Optional: clear text
+        label->setVisible(false);   // Hide label
+    }
 
     QString fact = targetCountry.facts[currentFactIndex];
     ui->questionLabel->setText(
