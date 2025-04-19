@@ -9,7 +9,7 @@ Brick::Brick(b2World* world, const QPointF& position, const QString& answer, boo
     body = world->CreateBody(&bodyDef);
 
     b2PolygonShape shape;
-    shape.SetAsBox(30.0f, 15.0f); // Brick dimensions, change accordingly
+    shape.SetAsBox(100.0f, 50.0f); // Brick dimensions, change accordingly
 
     b2FixtureDef fixtureDef;
     fixtureDef.shape = &shape;
@@ -27,11 +27,11 @@ Brick::~Brick() {
 
 void Brick::draw(QPainter& painter) {
     QPointF position(body->GetPosition().x, body->GetPosition().y); // the center of the brick
-    painter.setBrush(Qt::green);    // change color as needed
-    painter.drawRect(QRectF(position.x() - 30, position.y() - 15, 60, 30)); // (left, top, width, height)
+    painter.setBrush(Qt::blue);    // change color as needed
+    painter.drawRect(QRectF(position.x() - 30, position.y() - 15, 120, 60)); // (left, top, width, height)
 
-    painter.setPen(Qt::black);
-    painter.drawText(QRectF(position.x() - 30, position.y() - 15, 60, 30), Qt::AlignCenter, answer);
+    painter.setPen(Qt::white);
+    painter.drawText(QRectF(position.x() - 30, position.y() - 15, 120, 60), Qt::AlignCenter, answer);
 }
 
 void Brick::destroy() {
