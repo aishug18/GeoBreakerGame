@@ -1,15 +1,12 @@
 #ifndef WALL_H
 #define WALL_H
 
+#include <QRectF>
 #include <Box2D/Box2D.h>
-#include <QPainter>
 
-/*
- * Represents a Wall in the game.
- * If a Ball hits a Wall, the Ball will bounce.
- */
-class Wall
-{
+class QPainter;
+
+class Wall {
 public:
     Wall(b2World* world, const QRectF& rect);
     ~Wall();
@@ -17,12 +14,9 @@ public:
     void draw(QPainter& painter);
     b2Body* getBody() const { return body; }
 
-
-    //void handleCollision(GameObject* other);
-
 private:
-    b2Body* body;   // Wall's physics body
-    QPixmap sprite; // Sprite for the wall
+    b2Body* body;
+    QRectF m_rect;  // Add this member variable to store rectangle for drawing
 };
 
 #endif // WALL_H

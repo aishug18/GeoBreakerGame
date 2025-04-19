@@ -1,62 +1,49 @@
 #include "resultpage.h"
+#include "ui_resultpage.h"
 #include "mainwindow.h"
 #include "mappage.h"
-#include <QVBoxLayout>
-#include <QHBoxLayout>
-#include <QLabel>
-#include <QPushButton>
+#include <QSettings>
+#include <algorithm>
 
 ResultPage::ResultPage(int finalScore,
                        int correctCount,
                        int wrongCount,
                        QWidget* parent)
     : QWidget(parent)
+    , ui(new Ui::ResultPage)
 {
-    setWindowTitle("Game Over");
-    showFullScreen();  // ✅ Make it fullscreen for a dramatic final screen
+    ui->setupUi(this);
 
-    auto* layout = new QVBoxLayout(this);
-    layout->setContentsMargins(80, 80, 80, 80);
-    layout->setSpacing(40);
+    // 1) Persist & load top‑5 high scores
+    QSettings settings("MyCompany","GeoBreaker");
+    QStringList scores = settings.value("highScores").toStringList();
+    scores << QString::number(finalScore);
+    std::sort(scores.begin(), scores.end(),
+              [](auto &a, auto &b){ return a.toInt() > b.toInt(); });
+    if (scores.size()>5) scores.resize(5);
+    settings.setValue("highScores", scores);
 
-    auto* scoreLabel = new QLabel(
-        QString("Your Final Score:\n%1").arg(finalScore), this);
-    scoreLabel->setAlignment(Qt::AlignCenter);
-    scoreLabel->setStyleSheet("font-size: 48px; font-weight: bold; color: blue;");
-    layout->addWidget(scoreLabel);
+    // 2) Populate the QListWidget in the UI
+    ui->highScoreList->clear();
+    ui->highScoreList->addItems(scores);
 
-    auto* correctLabel = new QLabel(
-        QString("✅ Correct Answers: %1").arg(correctCount), this);
-    auto* wrongLabel = new QLabel(
-        QString("❌ Wrong Answers: %1").arg(wrongCount), this);
+    // 3) Update the rest of the widgets
+    ui->yourScoreLabel->setText(
+        QString("Your Final Score:\n%1").arg(finalScore));
+    ui->correctLabel->setText(
+        QString("✅ Correct: %1").arg(correctCount));
+    ui->wrongLabel->setText(
+        QString("❌ Wrong: %1").arg(wrongCount));
 
-    correctLabel->setAlignment(Qt::AlignCenter);
-    wrongLabel->setAlignment(Qt::AlignCenter);
+    // 4) Wire up buttons
+    connect(ui->mainMenuBtn, &QPushButton::clicked,
+            this, &ResultPage::onMainMenuClicked);
+    connect(ui->mapBtn,      &QPushButton::clicked,
+            this, &ResultPage::onMapClicked);
+}
 
-    correctLabel->setStyleSheet("font-size: 32px; color: green;");
-    wrongLabel->setStyleSheet("font-size: 32px; color: red;");
-
-    layout->addWidget(correctLabel);
-    layout->addWidget(wrongLabel);
-
-    auto* btnLayout = new QHBoxLayout;
-    auto* mainMenuBtn = new QPushButton("🏠 Main Menu", this);
-    auto* mapBtn = new QPushButton("🗺️ Map", this);
-
-    // Styling buttons for a big-screen look
-    QString btnStyle = "font-size: 24px; padding: 40px 80px; border-radius: 10px;";
-    mainMenuBtn->setStyleSheet(btnStyle);
-    mapBtn->setStyleSheet(btnStyle);
-
-    btnLayout->addStretch();
-    btnLayout->addWidget(mainMenuBtn);
-    btnLayout->addSpacing(40);
-    btnLayout->addWidget(mapBtn);
-    btnLayout->addStretch();
-    layout->addLayout(btnLayout);
-
-    connect(mainMenuBtn, &QPushButton::clicked, this, &ResultPage::onMainMenuClicked);
-    connect(mapBtn, &QPushButton::clicked, this, &ResultPage::onMapClicked);
+ResultPage::~ResultPage() {
+    delete ui;
 }
 
 void ResultPage::onMainMenuClicked() {
