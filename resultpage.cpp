@@ -13,41 +13,51 @@ ResultPage::ResultPage(int finalScore,
     : QWidget(parent)
 {
     setWindowTitle("Game Over");
-    auto* layout = new QVBoxLayout(this);
-    layout->setContentsMargins(40,40,40,40);
-    layout->setSpacing(20);
+    showFullScreen();  // ✅ Make it fullscreen for a dramatic final screen
 
-    // Big score
+    auto* layout = new QVBoxLayout(this);
+    layout->setContentsMargins(80, 80, 80, 80);
+    layout->setSpacing(40);
+
     auto* scoreLabel = new QLabel(
-        QString("Your final score:\n%1").arg(finalScore), this);
+        QString("Your Final Score:\n%1").arg(finalScore), this);
     scoreLabel->setAlignment(Qt::AlignCenter);
-    scoreLabel->setStyleSheet("font-size:24px; font-weight:bold;");
+    scoreLabel->setStyleSheet("font-size: 48px; font-weight: bold; color: blue;");
     layout->addWidget(scoreLabel);
 
-    // Correct / Wrong stats
     auto* correctLabel = new QLabel(
-        QString("Correct answers: %1").arg(correctCount), this);
-    auto* wrongLabel   = new QLabel(
-        QString("Wrong answers:   %1").arg(wrongCount),   this);
+        QString("✅ Correct Answers: %1").arg(correctCount), this);
+    auto* wrongLabel = new QLabel(
+        QString("❌ Wrong Answers: %1").arg(wrongCount), this);
+
     correctLabel->setAlignment(Qt::AlignCenter);
-    wrongLabel  ->setAlignment(Qt::AlignCenter);
-    correctLabel->setStyleSheet("font-size:18px;");
-    wrongLabel  ->setStyleSheet("font-size:18px;");
+    wrongLabel->setAlignment(Qt::AlignCenter);
+
+    correctLabel->setStyleSheet("font-size: 32px; color: green;");
+    wrongLabel->setStyleSheet("font-size: 32px; color: red;");
+
     layout->addWidget(correctLabel);
     layout->addWidget(wrongLabel);
 
-    // Buttons
     auto* btnLayout = new QHBoxLayout;
-    auto* mainMenuBtn = new QPushButton("Main Menu", this);
-    auto* mapBtn      = new QPushButton("Map", this);
+    auto* mainMenuBtn = new QPushButton("🏠 Main Menu", this);
+    auto* mapBtn = new QPushButton("🗺️ Map", this);
+
+    // Styling buttons for a big-screen look
+    QString btnStyle = "font-size: 24px; padding: 40px 80px; border-radius: 10px;";
+    mainMenuBtn->setStyleSheet(btnStyle);
+    mapBtn->setStyleSheet(btnStyle);
+
+    btnLayout->addStretch();
     btnLayout->addWidget(mainMenuBtn);
+    btnLayout->addSpacing(40);
     btnLayout->addWidget(mapBtn);
+    btnLayout->addStretch();
     layout->addLayout(btnLayout);
 
     connect(mainMenuBtn, &QPushButton::clicked, this, &ResultPage::onMainMenuClicked);
-    connect(mapBtn,      &QPushButton::clicked, this, &ResultPage::onMapClicked);
+    connect(mapBtn, &QPushButton::clicked, this, &ResultPage::onMapClicked);
 }
-
 
 void ResultPage::onMainMenuClicked() {
     auto* mw = new MainWindow();
