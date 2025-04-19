@@ -6,77 +6,89 @@
 #include <QTimer>
 #include <QMediaPlayer>
 #include <QAudioOutput>
-#include <vector>
-#include <QMouseEvent>
-#include "ball.h"
+#include <random>
 #include "brick.h"
+#include "ball.h"
 #include "wall.h"
 
-namespace Ui {
-class GamePage;
-}
+enum class RoundState { MultipleChoice, TrueFalse };
 
-class GamePage : public QWidget
-{
+namespace Ui { class GamePage; }
+
+class ContactListener;
+
+class GamePage : public QWidget {
     Q_OBJECT
+    friend class ContactListener;
 
 public:
     explicit GamePage(QWidget *parent = nullptr);
     ~GamePage();
-    void startGame();
 
 protected:
-    // these are for keyboard inputs, if we want to implement those
-    void keyPressEvent(QKeyEvent* event) override;
-    void keyReleaseEvent(QKeyEvent* event) override;
-
-    void paintEvent(QPaintEvent* event) override;   // Draw the scene
-    void mousePressEvent(QMouseEvent *event) override;  // User presses the mouse, the aim line should start.
-    void mouseMoveEvent(QMouseEvent *event) override;   // User drags the mouse, aim line should move accordingly.
-    void mouseReleaseEvent(QMouseEvent *event) override;    // User releases the mouse, aim line should disappear and ball launches.
+    void paintEvent(QPaintEvent* event) override;
+    void mousePressEvent(QMouseEvent *event) override;
+    void mouseMoveEvent(QMouseEvent *event) override;
+    void mouseReleaseEvent(QMouseEvent *event) override;
 
 private slots:
-    void updateGame();
-    void updateTimer();
-
-private:
-    Ui::GamePage *ui;
-    b2World* world; // Box2D world
-    Ball* ball; // Ball object
-    std::vector<Brick*> bricks; // List of Brick objects
-    std::vector<Wall*> walls;   // Walls of the game
-    b2Body* platformBody;   // Platform object, where the ball rests
-    QPointF aimStart;   // Aim start point
-    QPointF aimEnd; // Aim end point
-    int score;  // Player's score
-
-    QMediaPlayer *gameMusicPlayer;
-    QAudioOutput *gameAudioOutput;
-    QMediaPlayer *clickPlayer;
-    QAudioOutput *clickAudio;
-
-
-    // other stuff, do we need??
-    QTimer* gameLoopTimer = nullptr;
-    QTimer* gameTimer = nullptr;
-    //ContactListener* contactListener = nullptr;
-    int remainingTime = 15;
-    void incrementScore(int points);
-
-
-    // Methods to set up world and check collisions
-    void setupObjects();    // Set up all game objects (bricks, walls, ball)
-    void updatePhysics();   // Simulate physics
-    void checkCollision(); // Check collisions between the ball and bricks
-    void drawGame(QPainter& painter);   // Render game components
-    void drawPlatform(QPainter& painter);  // Create a platform where the ball rests
+    void onTimerTick();
+    void homeButtonClicked();
+    void mapButtonClicked();
 
 signals:
     void scoreChanged(int newScore);
 
-private slots:
-    void homeButtonClicked();
-    void mapButtonClicked();
+private:
+    // Core
+    Ui::GamePage* ui;
+    b2World* world;
+    ContactListener* contactListener;
+    Ball* ball;
+    std::vector<Brick*> bricks;
+    std::vector<Wall*> walls;
+    b2Body* platformBody;
+
+    // RNG
+    std::mt19937 rng;
+
+    // Rounds & state
+    RoundState roundState = RoundState::MultipleChoice;
+    int currentFactIndex = 0;
+    struct CountryInfo { QString name, capital; QList<QString> facts; };
+    QList<CountryInfo> allCountries, selectedCountries;
+    CountryInfo targetCountry;
+
+private:
+    int score = 0;
+    int correctCount = 0;
+    int wrongCount   = 0;
+
+    QTimer* countdownTimer;
+    int remainingTime = 120;         // 60 s total
+    // Audio
+    QMediaPlayer *gameMusicPlayer, *clickPlayer, *correctPlayer, *wrongPlayer;
+    QAudioOutput *gameAudioOutput, *clickAudio, *correctAudio, *wrongAudio;
+
+    // Aiming
+    QPointF aimStart, aimEnd;
+
+    // Setup & loops
+    void setupObjects();
+    void setupRoundOne();
+    void setupCountrySpecificRound();
+    void populateCountryData();
+    void destroyAllBricks();
+    void updatePhysics();
+    void handleContact(b2Body* A, b2Body* B);
+    void drawGame(QPainter& painter);
+    void drawPlatform(QPainter& painter);
+    void drawReflectedLine(QPainter& p, const QPointF& A, const QPointF& B);
+    void endGame();
+
+    // Utilities
+    void playCorrectSound() { correctPlayer->play(); }
+    void playWrongSound()   { wrongPlayer->play();   }
 };
 
 #endif // GAMEPAGE_H

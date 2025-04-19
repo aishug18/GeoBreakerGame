@@ -58,10 +58,12 @@ SOURCES += \
     Box2D/Rope/b2Rope.cpp \
     ball.cpp \
     brick.cpp \
+    contactlistener.cpp \
     gamepage.cpp \
     main.cpp \
     mainwindow.cpp \
     mappage.cpp \
+    resultpage.cpp \
     tutorialpage.cpp \
     wall.cpp
 
@@ -115,9 +117,11 @@ HEADERS += \
     Box2D/Rope/b2Rope.h \
     ball.h \
     brick.h \
+    contactlistener.h \
     gamepage.h \
     mainwindow.h \
     mappage.h \
+    resultpage.h \
     tutorialpage.h \
     wall.h
 
@@ -125,6 +129,7 @@ FORMS += \
     gamepage.ui \
     mainwindow.ui \
     mappage.ui \
+    resultpage.ui \
     tutorialpage.ui
 
 # Default rules for deployment.

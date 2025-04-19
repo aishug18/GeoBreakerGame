@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>ResultPage</class>
+ <widget class="QWidget" name="ResultPage">
+  <property name="windowTitle"><string>Game Over</string></property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+    <!-- Final Score -->
+    <item>
+      <widget class="QLabel" name="scoreLabel">
+        <property name="text"><string>Your final score: 0</string></property>
+        <property name="alignment"><set>Qt::AlignCenter</set></property>
+        <property name="styleSheet">
+          <string>font-size:24px; font-weight:bold; color:#5239FF;</string>
+        </property>
+      </widget>
+    </item>
+    <!-- Correct / Wrong Stats -->
+    <item>
+      <layout class="QHBoxLayout" name="statsLayout">
+        <item>
+          <widget class="QLabel" name="correctLabel">
+            <property name="text"><string>✅ Correct: 0</string></property>
+            <property name="styleSheet">
+              <string>font-size:18px; color:#27ae60;</string>
+            </property>
+          </widget>
+        </item>
+        <item>
+          <widget class="QLabel" name="wrongLabel">
+            <property name="text"><string>❌ Wrong: 0</string></property>
+            <property name="styleSheet">
+              <string>font-size:18px; color:#c0392b;</string>
+            </property>
+          </widget>
+        </item>
+      </layout>
+    </item>
+    <!-- Buttons -->
+    <item>
+      <layout class="QHBoxLayout" name="buttonLayout" stretch="0,0">
+        <item>
+          <widget class="QPushButton" name="mainMenuBtn">
+            <property name="text"><string>Main Menu</string></property>
+            <property name="styleSheet">
+              <string>
+                QPushButton {
+                  background-color: #5239FF;
+                  color: white;
+                  border-radius: 8px;
+                  padding: 12px;
+                  font-size: 16px;
+                }
+                QPushButton:hover { background-color: #3a1db9; }
+              </string>
+            </property>
+          </widget>
+        </item>
+        <item>
+          <widget class="QPushButton" name="mapBtn">
+            <property name="text"><string>Map</string></property>
+            <property name="styleSheet">
+              <string>
+                QPushButton {
+                  background-color: #FF784E;
+                  color: white;
+                  border-radius: 8px;
+                  padding: 12px;
+                  font-size: 16px;
+                }
+                QPushButton:hover { background-color: #e86e3e; }
+              </string>
+            </property>
+          </widget>
+        </item>
+      </layout>
+    </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
