@@ -2,7 +2,7 @@
 #include <Box2D/Box2D.h>
 #include <cstdint>
 
-Ball::Ball(b2World* world) : startPosition(400.0f, 600.0f) {
+Ball::Ball(b2World* world) : startPosition(375.0f, 675.0f) {
     // Define and create the ball's physics body
     b2BodyDef bodyDef;
     bodyDef.type = b2_dynamicBody;
