@@ -103,10 +103,10 @@ void GamePage::setupObjects() {
     // Walls
     walls.push_back(new Wall(world, QRectF(0,0,800,30)));   // top
     walls.push_back(new Wall(world, QRectF(0,0,30,800)));   // left
-    walls.push_back(new Wall(world, QRectF(770,0,30,800))); // right
+    walls.push_back(new Wall(world, QRectF(800,0,30,800))); // right
 
     // Platform (static)
-    b2BodyDef pd; pd.type = b2_staticBody; pd.position.Set(375,700);
+    b2BodyDef pd; pd.type = b2_staticBody; pd.position.Set(400,700);
     platformBody = world->CreateBody(&pd);
     b2PolygonShape ps; ps.SetAsBox(100,10);
     b2FixtureDef pf; pf.shape = &ps; pf.density=1.0f;
@@ -168,6 +168,11 @@ void GamePage::setupRoundOne() {
         ui->label_6,
         ui->label_7
     };
+
+    for (QLabel* label : labels) {
+        label->clear();             // Optional: clear text
+        label->setVisible(false);   // Hide label
+    }
 
     for(int i = 0; i < 5; ++i) {
         const auto& country = selectedCountries[i];
