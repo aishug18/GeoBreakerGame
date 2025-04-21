@@ -12,5 +12,6 @@
         <file>assets/game_background.jpg</file>
         <file>assets/pin.png</file>
         <file>assets/wood_panel.png</file>
+        <file>assets/tutorial_background.jpg</file>
     </qresource>
 </RCC>

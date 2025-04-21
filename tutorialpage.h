@@ -15,6 +15,9 @@ public:
     explicit TutorialPage(QWidget *parent = nullptr);
     ~TutorialPage();
 
+private slots:
+    void on_closeButton_clicked();
+
 private:
     Ui::TutorialPage *ui;
 };
