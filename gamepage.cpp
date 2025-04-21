@@ -77,16 +77,55 @@ GamePage::GamePage(QWidget *parent)
 
     // Buttons
     QString buttonStyle = R"(
-        QPushButton {
-            border-image: url(:/images/assets/wood_button.png);
-            color: white; font-weight: bold; font-size: 18px; padding: 10px;
-        }
-        QPushButton:hover { opacity: 0.9; }
+    QPushButton {
+        border: none;
+        background-color: transparent;
+        border-image: url(:/images/assets/wood_button.png);
+        padding: 10px;
+        color: black;
+        font-size: 20px;
+        font-weight: bold;
+    }
+    QPushButton:hover {
+        opacity: 0.9;
+    }
     )";
+
     ui->home->setStyleSheet(buttonStyle);
     ui->map->setStyleSheet(buttonStyle);
     connect(ui->home, &QPushButton::clicked, this, &GamePage::homeButtonClicked);
     connect(ui->map,  &QPushButton::clicked, this, &GamePage::mapButtonClicked);
+
+    QString labelStyle = R"(
+    QLabel {
+        background-image: url(:/images/assets/scoreboard_frame.png);
+        background-repeat: no-repeat;
+        background-position: center;
+        color: black;
+        font-size: 30px;
+        font-weight: bold;
+        qproperty-alignment: AlignCenter;
+        padding: 10px;
+    }
+    )";
+
+    ui->timer->setStyleSheet(labelStyle);
+    ui->scoreLabel->setStyleSheet(labelStyle);
+
+    QString scoreLabelStyle = R"(
+    QLabel {
+        background-image: url(:/images/assets/scoreboard_frame_2.png);
+        background-repeat: no-repeat;
+        background-position: center;
+        color: black;
+        font-size: 30px;
+        font-weight: bold;
+        qproperty-alignment: AlignCenter;
+        padding: 10px;
+    }
+    )";
+
+    ui->scoreTextLabel->setStyleSheet(scoreLabelStyle);
 }
 
 GamePage::~GamePage() {

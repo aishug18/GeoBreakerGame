@@ -43,25 +43,25 @@
    <property name="frameShadow">
     <enum>QFrame::Shadow::Raised</enum>
    </property>
-   <widget class="QLabel" name="label">
+   <widget class="QLabel" name="scoreTextLabel">
     <property name="geometry">
      <rect>
-      <x>30</x>
-      <y>20</y>
-      <width>151</width>
-      <height>61</height>
+      <x>14</x>
+      <y>10</y>
+      <width>200</width>
+      <height>80</height>
      </rect>
     </property>
     <property name="font">
      <font>
       <pointsize>-1</pointsize>
-      <bold>true</bold>
+      <fontweight>DemiBold</fontweight>
      </font>
     </property>
     <property name="styleSheet">
      <string notr="true">QLabel#label {
-    color: #ffffff;
-    font-size: 28px;
+	color: rgb(25, 25, 25);
+    font-size: 60px;
     font-weight: bold;
 }</string>
     </property>
@@ -75,10 +75,10 @@
    <widget class="QPushButton" name="map">
     <property name="geometry">
      <rect>
-      <x>60</x>
-      <y>590</y>
-      <width>101</width>
-      <height>61</height>
+      <x>40</x>
+      <y>560</y>
+      <width>150</width>
+      <height>100</height>
      </rect>
     </property>
     <property name="font">
@@ -93,10 +93,10 @@
    <widget class="QPushButton" name="home">
     <property name="geometry">
      <rect>
-      <x>60</x>
-      <y>680</y>
-      <width>101</width>
-      <height>61</height>
+      <x>40</x>
+      <y>670</y>
+      <width>150</width>
+      <height>90</height>
      </rect>
     </property>
     <property name="font">
@@ -111,10 +111,10 @@
    <widget class="QLabel" name="scoreLabel">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>100</y>
-      <width>171</width>
-      <height>41</height>
+      <x>43</x>
+      <y>110</y>
+      <width>144</width>
+      <height>70</height>
      </rect>
     </property>
     <property name="font">
@@ -139,10 +139,10 @@
    <widget class="QLabel" name="timer">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>160</y>
-      <width>171</width>
-      <height>41</height>
+      <x>43</x>
+      <y>200</y>
+      <width>144</width>
+      <height>70</height>
      </rect>
     </property>
     <property name="font">
@@ -164,6 +164,34 @@
      <set>Qt::AlignmentFlag::AlignCenter</set>
     </property>
    </widget>
+   <widget class="QLabel" name="rightGameFrame">
+    <property name="geometry">
+     <rect>
+      <x>-10</x>
+      <y>-10</y>
+      <width>245</width>
+      <height>840</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"/>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap resource="resources.qrc">:/images/assets/right_game_frame.jpg</pixmap>
+    </property>
+    <property name="scaledContents">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <zorder>rightGameFrame</zorder>
+   <zorder>scoreTextLabel</zorder>
+   <zorder>map</zorder>
+   <zorder>home</zorder>
+   <zorder>scoreLabel</zorder>
+   <zorder>timer</zorder>
   </widget>
   <widget class="QLabel" name="questionLabel">
    <property name="geometry">
@@ -286,6 +314,8 @@ color: #ffffff;
    </property>
   </widget>
  </widget>
- <resources/>
+ <resources>
+  <include location="resources.qrc"/>
+ </resources>
  <connections/>
 </ui>

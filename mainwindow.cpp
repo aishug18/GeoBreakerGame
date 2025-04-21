@@ -21,7 +21,7 @@ MainWindow::MainWindow(QWidget *parent)
     QString menuButtonStyle = R"(
     QPushButton {
         border-image: url(:/images/assets/wood_button.png);
-        color: white;
+        color: black;
         font-weight: bold;
         font-size: 18px;
         padding: 10px;

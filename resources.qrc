@@ -13,5 +13,8 @@
         <file>assets/pin.png</file>
         <file>assets/wood_panel.png</file>
         <file>assets/tutorial_background.jpg</file>
+        <file>assets/right_game_frame.jpg</file>
+        <file>assets/scoreboard_frame.png</file>
+        <file>assets/scoreboard_frame_2.png</file>
     </qresource>
 </RCC>
