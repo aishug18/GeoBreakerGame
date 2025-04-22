@@ -23,6 +23,10 @@ private:
     QLabel* scoreLabel;
     QPushButton* mainMenuBtn;
     QPushButton* mapBtn;
+
+protected:
+    void paintEvent(QPaintEvent *event) override;
+
 };
 
 #endif // RESULTPAGE_H

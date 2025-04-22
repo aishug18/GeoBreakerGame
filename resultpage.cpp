@@ -5,6 +5,7 @@
 #include <QHBoxLayout>
 #include <QLabel>
 #include <QPushButton>
+#include <QPainter>
 
 ResultPage::ResultPage(int finalScore,
                        int correctCount,
@@ -13,7 +14,6 @@ ResultPage::ResultPage(int finalScore,
     : QWidget(parent)
 {
     setWindowTitle("Game Over");
-    showFullScreen();  // ✅ Make it fullscreen for a dramatic final screen
 
     auto* layout = new QVBoxLayout(this);
     layout->setContentsMargins(80, 80, 80, 80);
@@ -22,7 +22,7 @@ ResultPage::ResultPage(int finalScore,
     auto* scoreLabel = new QLabel(
         QString("Your Final Score:\n%1").arg(finalScore), this);
     scoreLabel->setAlignment(Qt::AlignCenter);
-    scoreLabel->setStyleSheet("font-size: 48px; font-weight: bold; color: blue;");
+    scoreLabel->setStyleSheet("font-size: 48px; font-weight: bold; color: black;");
     layout->addWidget(scoreLabel);
 
     auto* correctLabel = new QLabel(
@@ -57,6 +57,15 @@ ResultPage::ResultPage(int finalScore,
 
     connect(mainMenuBtn, &QPushButton::clicked, this, &ResultPage::onMainMenuClicked);
     connect(mapBtn, &QPushButton::clicked, this, &ResultPage::onMapClicked);
+}
+
+void ResultPage::paintEvent(QPaintEvent* event) {
+    QPainter painter(this);
+    QPixmap bg(":/images/assets/result_background.jpg");
+
+    // Scale the pixmap to fit the entire window
+    QPixmap scaled = bg.scaled(this->size(), Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
+    painter.drawPixmap(0, 0, scaled);
 }
 
 void ResultPage::onMainMenuClicked() {

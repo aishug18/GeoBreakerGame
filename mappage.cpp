@@ -72,7 +72,7 @@ MapPage::MapPage(QWidget *parent)
     clickPlayer = new QMediaPlayer(this);
     clickPlayer->setAudioOutput(clickAudio);
     clickPlayer->setSource(QUrl("qrc:/images/assets/button_click_sound_1.mp3"));
-    clickAudio->setVolume(0.5);
+    clickAudio->setVolume(0.6);
 
     ui->commandLinkButton->setStyleSheet(pinStyle);
     ui->commandLinkButton2->setStyleSheet(pinStyle);

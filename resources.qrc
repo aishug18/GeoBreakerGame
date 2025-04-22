@@ -19,5 +19,7 @@
         <file>assets/questionBox.jpg</file>
         <file>assets/correct_sound.mp3</file>
         <file>assets/wrong_sound.mp3</file>
+        <file>assets/result_background.jpg</file>
+        <file>assets/game_music.mp3</file>
     </qresource>
 </RCC>

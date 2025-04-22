@@ -57,7 +57,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     // Load and play music
     musicPlayer->setSource(QUrl("qrc:/images/assets/menu_music.mp3"));
-    audioOutput->setVolume(0.1);  // volume
+    audioOutput->setVolume(0.2);  // volume
     musicPlayer->play();
     musicPlayer->setLoops(QMediaPlayer::Infinite);
 

@@ -2,47 +2,47 @@
 <ui version="4.0">
  <class>ResultPage</class>
  <widget class="QWidget" name="ResultPage">
-  <property name="windowTitle"><string>Game Over</string></property>
-  <layout class="QVBoxLayout" name="verticalLayout">
-    <!-- Final Score -->
-    <item>
-      <widget class="QLabel" name="scoreLabel">
-        <property name="text"><string>Your final score: 0</string></property>
-        <property name="alignment"><set>Qt::AlignCenter</set></property>
-        <property name="styleSheet">
-          <string>font-size:24px; font-weight:bold; color:#5239FF;</string>
-        </property>
-      </widget>
-    </item>
-    <!-- Correct / Wrong Stats -->
-    <item>
-      <layout class="QHBoxLayout" name="statsLayout">
-        <item>
-          <widget class="QLabel" name="correctLabel">
-            <property name="text"><string>✅ Correct: 0</string></property>
-            <property name="styleSheet">
-              <string>font-size:18px; color:#27ae60;</string>
-            </property>
-          </widget>
-        </item>
-        <item>
-          <widget class="QLabel" name="wrongLabel">
-            <property name="text"><string>❌ Wrong: 0</string></property>
-            <property name="styleSheet">
-              <string>font-size:18px; color:#c0392b;</string>
-            </property>
-          </widget>
-        </item>
-      </layout>
-    </item>
-    <!-- Buttons -->
-    <item>
-      <layout class="QHBoxLayout" name="buttonLayout" stretch="0,0">
-        <item>
-          <widget class="QPushButton" name="mainMenuBtn">
-            <property name="text"><string>Main Menu</string></property>
-            <property name="styleSheet">
-              <string>
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>580</width>
+    <height>460</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Game Over</string>
+  </property>
+  <widget class="QLabel" name="scoreLabel">
+   <property name="geometry">
+    <rect>
+     <x>190</x>
+     <y>90</y>
+     <width>207</width>
+     <height>32</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string>font-size:24px; font-weight:bold; color:#5239FF;</string>
+   </property>
+   <property name="text">
+    <string>Your final score: 0</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignmentFlag::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="mainMenuBtn">
+   <property name="geometry">
+    <rect>
+     <x>140</x>
+     <y>310</y>
+     <width>103</width>
+     <height>45</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string>
                 QPushButton {
                   background-color: #5239FF;
                   color: white;
@@ -52,14 +52,22 @@
                 }
                 QPushButton:hover { background-color: #3a1db9; }
               </string>
-            </property>
-          </widget>
-        </item>
-        <item>
-          <widget class="QPushButton" name="mapBtn">
-            <property name="text"><string>Map</string></property>
-            <property name="styleSheet">
-              <string>
+   </property>
+   <property name="text">
+    <string>Main Menu</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="mapBtn">
+   <property name="geometry">
+    <rect>
+     <x>330</x>
+     <y>310</y>
+     <width>55</width>
+     <height>45</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string>
                 QPushButton {
                   background-color: #FF784E;
                   color: white;
@@ -69,12 +77,43 @@
                 }
                 QPushButton:hover { background-color: #e86e3e; }
               </string>
-            </property>
-          </widget>
-        </item>
-      </layout>
-    </item>
-  </layout>
+   </property>
+   <property name="text">
+    <string>Map</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="wrongLabel">
+   <property name="geometry">
+    <rect>
+     <x>320</x>
+     <y>190</y>
+     <width>104</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string>font-size:18px; color:#c0392b;</string>
+   </property>
+   <property name="text">
+    <string>❌ Wrong: 0</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="correctLabel">
+   <property name="geometry">
+    <rect>
+     <x>140</x>
+     <y>200</y>
+     <width>106</width>
+     <height>24</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string>font-size:18px; color:#27ae60;</string>
+   </property>
+   <property name="text">
+    <string>✅ Correct: 0</string>
+   </property>
+  </widget>
  </widget>
  <resources/>
  <connections/>

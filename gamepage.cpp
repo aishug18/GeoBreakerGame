@@ -28,8 +28,8 @@ GamePage::GamePage(QWidget *parent)
     gameAudioOutput = new QAudioOutput(this);
     gameMusicPlayer = new QMediaPlayer(this);
     gameMusicPlayer->setAudioOutput(gameAudioOutput);
-    gameMusicPlayer->setSource(QUrl("qrc:/images/assets/menu_music.mp3"));
-    gameAudioOutput->setVolume(0.1);
+    gameMusicPlayer->setSource(QUrl("qrc:/images/assets/game_music.mp3"));
+    gameAudioOutput->setVolume(0.2);
     gameMusicPlayer->play();
     gameMusicPlayer->setLoops(QMediaPlayer::Infinite);
 
@@ -412,7 +412,8 @@ void GamePage::onTimerTick() {
 }
 
 void GamePage::endGame() {
-     auto* results = new ResultPage(score,correctCount,wrongCount);
+    auto* results = new ResultPage(score,correctCount,wrongCount);
+    gameMusicPlayer->stop();
     results->show();
     close();
 }
