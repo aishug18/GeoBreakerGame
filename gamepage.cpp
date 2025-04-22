@@ -45,13 +45,13 @@ GamePage::GamePage(QWidget *parent)
     correctPlayer = new QMediaPlayer(this);
     correctPlayer->setAudioOutput(correctAudio);
     correctPlayer->setSource(QUrl("qrc:/images/assets/correct_sound.mp3"));
-    correctAudio->setVolume(0.7);
+    correctAudio->setVolume(0.5);
 
     wrongAudio = new QAudioOutput(this);
     wrongPlayer = new QMediaPlayer(this);
     wrongPlayer->setAudioOutput(wrongAudio);
     wrongPlayer->setSource(QUrl("qrc:/images/assets/wrong_sound.mp3"));
-    wrongAudio->setVolume(0.7);
+    wrongAudio->setVolume(0.5);
 
     // Score label
     ui->scoreLabel->setText("0");
@@ -108,7 +108,6 @@ GamePage::GamePage(QWidget *parent)
         padding: 10px;
     }
     )";
-
     ui->timer->setStyleSheet(labelStyle);
     ui->scoreLabel->setStyleSheet(labelStyle);
 
@@ -124,8 +123,8 @@ GamePage::GamePage(QWidget *parent)
         padding: 10px;
     }
     )";
-
     ui->scoreTextLabel->setStyleSheet(scoreLabelStyle);
+
 }
 
 GamePage::~GamePage() {
@@ -147,7 +146,7 @@ void GamePage::setupObjects() {
     // Platform (static)
     b2BodyDef pd; pd.type = b2_staticBody; pd.position.Set(400,700);
     platformBody = world->CreateBody(&pd);
-    b2PolygonShape ps; ps.SetAsBox(100,10);
+    b2PolygonShape ps; ps.SetAsBox(400,10);
     b2FixtureDef pf; pf.shape = &ps; pf.density=1.0f;
     platformBody->CreateFixture(&pf);
 
@@ -194,7 +193,7 @@ void GamePage::setupRoundOne() {
                 .arg(targetCountry.facts[currentFactIndex]);
     }
     ui->questionLabel->setText(q);
-    ui->questionLabel->setAlignment(Qt::AlignCenter);
+    ui->questionLabel->setAlignment(Qt::AlignTop | Qt::AlignHCenter);
 
     QPointF positions[5] = {
         {175,275}, {375,275}, {575,275}, {275,475}, {475,475}
@@ -253,7 +252,7 @@ void GamePage::setupRoundTwo() {
     QString q = QString("Which country does this fact belong to?\n\"%1\"")
                     .arg(targetCountry.facts[currentFactIndex]);
     ui->questionLabel->setText(q);
-    ui->questionLabel->setAlignment(Qt::AlignCenter);
+    ui->questionLabel->setAlignment(Qt::AlignTop | Qt::AlignHCenter);
 
     QPointF positions[5] = {
         {175,275}, {375,275}, {575,275}, {275,475}, {475,475}
@@ -345,6 +344,8 @@ void GamePage::handleContact(b2Body* A, b2Body* B) {
 
 void GamePage::paintEvent(QPaintEvent*) {
     QPainter p(this);
+    QPixmap bg(":/images/assets/game_background.png"); // Draw the background
+    p.drawPixmap(this->rect(), bg);
     drawGame(p);
 }
 
@@ -365,7 +366,7 @@ void GamePage::drawGame(QPainter& p) {
 void GamePage::drawPlatform(QPainter& p) {
     auto pos = platformBody->GetPosition();
     p.setBrush(Qt::gray);
-    p.drawRect(QRectF(pos.x-100, pos.y-10, 200,20));
+    p.drawRect(QRectF(pos.x-370, pos.y-10, 770,20));
 }
 
 void GamePage::drawReflectedLine(QPainter& p, const QPointF& A, const QPointF& B) {

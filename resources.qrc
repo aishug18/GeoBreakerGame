@@ -9,12 +9,15 @@
         <file>assets/button_click_sound_1.mp3</file>
         <file>assets/button_click_sound_2.mp3</file>
         <file>assets/wall_sprite.jpg</file>
-        <file>assets/game_background.jpg</file>
         <file>assets/pin.png</file>
         <file>assets/wood_panel.png</file>
         <file>assets/tutorial_background.jpg</file>
         <file>assets/right_game_frame.jpg</file>
         <file>assets/scoreboard_frame.png</file>
         <file>assets/scoreboard_frame_2.png</file>
+        <file>assets/game_background.png</file>
+        <file>assets/questionBox.jpg</file>
+        <file>assets/correct_sound.mp3</file>
+        <file>assets/wrong_sound.mp3</file>
     </qresource>
 </RCC>
