@@ -212,18 +212,7 @@ void GamePage::setupRoundOne() {
     ui->questionLabel->setText(q);
     ui->questionLabel->setAlignment(Qt::AlignTop | Qt::AlignHCenter);
 
-    QLabel* labels[5] = {
-        ui->label_3,
-        ui->label_4,
-        ui->label_5,
-        ui->label_6,
-        ui->label_7
-    };
 
-    for (QLabel* label : labels) {
-        label->clear();
-        label->setVisible(false);
-    }
 
     QPointF pos[5] = {
         {175,275}, {375,275}, {575,275}, {275,475}, {475,475}
@@ -275,18 +264,6 @@ void GamePage::setupRoundTwo() {
         {175,275}, {375,275}, {575,275}, {275,475}, {475,475}
     };
 
-    QLabel* labels[5] = {
-        ui->label_3,
-        ui->label_4,
-        ui->label_5,
-        ui->label_6,
-        ui->label_7
-    };
-
-    for (QLabel* label : labels) {
-        label->clear();
-        label->setVisible(false);
-    }
 
     for(int i = 0; i < 5; ++i) {
         const auto& country = selectedCountries[i];
@@ -297,7 +274,6 @@ void GamePage::setupRoundTwo() {
             new Brick(world, positions[i], country.name, isRight)
             );
 
-        labels[i]->setText(country.name);
     }
 }
 
