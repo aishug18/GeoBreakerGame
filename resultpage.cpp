@@ -8,6 +8,7 @@
 #include <QLabel>
 #include <QPushButton>
 #include <QPainter>
+#include "resultpage.h"
 #include <QListWidget>
 
 ResultPage::ResultPage(int finalScore,

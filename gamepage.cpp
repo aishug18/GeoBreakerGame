@@ -327,7 +327,7 @@ void GamePage::handleContact(b2Body* A, b2Body* B) {
                     score+=10; ++correctCount; playCorrectSound();
                     emit scoreChanged(score);
                     QTimer::singleShot(500,this,
-                                       &GamePage::setupCountrySpecificRound);
+                                       &GamePage::setupRoundTwo);
                 } else {
                     ++wrongCount; score=std::max(0,score-5);
                     playWrongSound(); emit scoreChanged(score);
@@ -354,7 +354,7 @@ void GamePage::handleContact(b2Body* A, b2Body* B) {
             // size==1 because we haven’t erased yet
             QTimer::singleShot(500,this,
                                roundState==RoundState::MultipleChoice
-                                   ? &GamePage::setupCountrySpecificRound
+                                   ? &GamePage::setupRoundTwo
                                    : &GamePage::setupRoundOne);
         }
 

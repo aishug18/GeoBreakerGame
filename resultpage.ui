@@ -23,8 +23,6 @@
     <right>40</right>
     <bottom>40</bottom>
    </property>
-   
-   <!-- High Scores Section -->
    <item>
     <widget class="QLabel" name="labelHighScores">
      <property name="styleSheet">
@@ -41,7 +39,6 @@
      </property>
     </widget>
    </item>
-   
    <item>
     <widget class="QListWidget" name="highScoreList">
      <property name="minimumSize">
@@ -59,8 +56,6 @@
      </property>
     </widget>
    </item>
-
-   <!-- Final Score -->
    <item>
     <widget class="QLabel" name="yourScoreLabel">
      <property name="styleSheet">
@@ -77,8 +72,6 @@
      </property>
     </widget>
    </item>
-
-   <!-- Stats Row -->
    <item>
     <layout class="QHBoxLayout" name="statsLayout" spacing="30">
      <item>
@@ -111,8 +104,6 @@
      </item>
     </layout>
    </item>
-
-   <!-- Buttons -->
    <item>
     <layout class="QHBoxLayout" name="buttonLayout" spacing="40">
      <property name="contentsMargins">
