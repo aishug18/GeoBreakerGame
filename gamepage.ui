@@ -58,7 +58,7 @@
     </property>
     <property name="styleSheet">
      <string notr="true">QLabel#label {
-	color: rgb(25, 25, 25);
+    color: rgb(25, 25, 25);
     font-size: 60px;
     font-weight: bold;
 }</string>
@@ -157,6 +157,35 @@
     </property>
     <property name="text">
      <string>0</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignmentFlag::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>180</y>
+      <width>151</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>-1</pointsize>
+      <fontweight>DemiBold</fontweight>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QLabel#label {
+    color: #ffffff;
+    font-size: 28px;
+    font-weight: bold;
+}</string>
+    </property>
+    <property name="text">
+     <string>TIMER</string>
     </property>
     <property name="alignment">
      <set>Qt::AlignmentFlag::AlignCenter</set>

@@ -25,6 +25,8 @@ public:
     explicit GamePage(QWidget *parent = nullptr);
     ~GamePage();
 
+    void addTime(int secs);
+
 protected:
     void paintEvent(QPaintEvent* event) override;
     void mousePressEvent(QMouseEvent *event) override;
@@ -40,7 +42,6 @@ signals:
     void scoreChanged(int newScore);
 
 private:
-    // Core
     Ui::GamePage* ui;
     b2World* world;
     ContactListener* contactListener;
@@ -49,31 +50,22 @@ private:
     std::vector<Wall*> walls;
     b2Body* platformBody;
 
-    // RNG
     std::mt19937 rng;
-
-    // Rounds & state
-    RoundState roundState = RoundState::MultipleChoice;
-    int currentFactIndex = 0;
+    RoundState roundState;
+    int currentFactIndex;
     struct CountryInfo { QString name, capital; QList<QString> facts; };
     QList<CountryInfo> allCountries, selectedCountries;
     CountryInfo targetCountry;
 
-private:
-    int score = 0;
-    int correctCount = 0;
-    int wrongCount   = 0;
-
+    int score, correctCount, wrongCount;
     QTimer* countdownTimer;
-    int remainingTime = 120;         // 60 s total
-    // Audio
+    int remainingTime;
+
     QMediaPlayer *gameMusicPlayer, *clickPlayer, *correctPlayer, *wrongPlayer;
     QAudioOutput *gameAudioOutput, *clickAudio, *correctAudio, *wrongAudio;
 
-    // Aiming
     QPointF aimStart, aimEnd;
 
-    // Setup & loops
     void setupObjects();
     void setupRoundOne();
     void setupRoundTwo();
@@ -81,12 +73,13 @@ private:
     void destroyAllBricks();
     void updatePhysics();
     void handleContact(b2Body* A, b2Body* B);
+
+    std::vector<Brick*> pendingDestroy;
     void drawGame(QPainter& painter);
     void drawPlatform(QPainter& painter);
     void drawReflectedLine(QPainter& p, const QPointF& A, const QPointF& B);
     void endGame();
 
-    // Utilities
     void playCorrectSound() { correctPlayer->play(); }
     void playWrongSound()   { wrongPlayer->play();   }
 };

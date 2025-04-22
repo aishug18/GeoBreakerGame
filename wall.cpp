@@ -1,60 +1,39 @@
 #include "wall.h"
+#include <QPainter>
 
-Wall::Wall(b2World* world, const QRectF& rect) {
-    b2BodyDef bodyDef;
-    bodyDef.type = b2_staticBody;   // Walls are static
-    bodyDef.position.Set(rect.center().x(), rect.center().y());
-    body = world->CreateBody(&bodyDef);
+static constexpr float PTM = 30.0f;
 
-    b2PolygonShape shape;
-    shape.SetAsBox(rect.width() / 2.0f, rect.height() / 2.0f);
+Wall::Wall(b2World* world, const QRectF& rectPx) {
+    m_rect = rectPx;
 
-    b2FixtureDef fixtureDef;
-    fixtureDef.shape = &shape;
-    fixtureDef.restitution = 1.0f;  // Bouncy walls
-    body->CreateFixture(&fixtureDef);
+    float x = rectPx.x()/PTM, y = rectPx.y()/PTM;
+    float w = rectPx.width()/PTM, h = rectPx.height()/PTM;
 
-    sprite.load(":/images/assets/wall_sprite.jpg");
+    b2BodyDef bd;
+    bd.type = b2_staticBody;
+    bd.position.Set(x + w/2, y + h/2);
+    body = world->CreateBody(&bd);
 
+    b2PolygonShape box;
+    box.SetAsBox(w/2, h/2);
+
+    b2FixtureDef fd;
+    fd.shape       = &box;
+    fd.density     = 0.0f;
+    fd.friction    = 0.3f;
+    fd.restitution = 1.0f;   // **FULL** bounce
+    body->CreateFixture(&fd);
 }
 
 Wall::~Wall() {
-    if (body && body->GetWorld()) {
+    if (body && body->GetWorld())
         body->GetWorld()->DestroyBody(body);
-    }
 }
 
 void Wall::draw(QPainter& painter) {
-    // Get the current position of the wall's physics body
-    QPointF position(body->GetPosition().x, body->GetPosition().y); // the center of the wall
-
-    // Get the dimensions of the wall
-    b2Fixture* fixture = body->GetFixtureList();
-    b2PolygonShape* shape = dynamic_cast<b2PolygonShape*>(fixture->GetShape());
-
-    if(shape) {
-        // The Box2D shape stores the half-width and half-height
-        float halfWidth = shape->m_vertices[1].x;   // half-width from the shape's vertices
-        float halfHeight = shape->m_vertices[2].y;   // half-height from the shape's vertices
-
-        // Now draw the wall
-
-        QRect rect(
-            position.x() - halfWidth,   // left
-            position.y() - halfHeight,  // top
-            halfWidth * 2,              // width
-            halfHeight * 2);           // height
-
-        painter.drawPixmap(rect, sprite);   // stretches a lot
-    }
+    painter.save();
+    painter.setBrush(Qt::darkGray);
+    painter.setPen(Qt::NoPen);
+    painter.drawRect(m_rect);
+    painter.restore();
 }
-
-
-// void Wall::handleCollision(GameObject* other) {
-//     // Probably do nothing or log collision
-//     // You can add logic if you want later
-//     // make ball bounce
-// }
-
-
-

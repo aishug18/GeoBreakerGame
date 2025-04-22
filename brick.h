@@ -1,33 +1,38 @@
 #ifndef BRICK_H
 #define BRICK_H
 
-#include <Box2D/Box2D.h>
 #include <QString>
-#include <QPointF>
+#include <QRectF>
 #include <QPainter>
+#include <Box2D/Box2D.h>
+
+enum class BrickType { Normal, TimeBonus };
+
+class GamePage;  // forward
 
 class Brick {
 public:
-    Brick(b2World* world, const QPointF& position, const QString& answer, bool isCorrect);
-    ~Brick();
+    // now takes both “correct?” and “power‑up type”
+    Brick(b2World* world,
+          const QPointF& positionPx,
+          const QString& labelText,
+          bool isCorrect,
+          BrickType type = BrickType::Normal);
+    virtual ~Brick();
 
-    void draw(QPainter& painter);
-    void destroy(); // brick is destroyed, add some animations
-    bool isCorrectAnswer() const { return correct; }
-    b2Body* getBody() const { return body; }
-
-    // do we need these?
-    //void handleCollision(GameObject* other);
-    bool isMarkedForDestruction() const { return markedForDestruction; }
+    b2Body*        getBody() const;
+    bool           isCorrectAnswer() const;
+    BrickType      getType() const;
+    virtual void   onHit(GamePage* gp);
+    void           draw(QPainter& painter);
+    void           destroy();
 
 private:
-    b2Body* body;   // Brick's physics body
-    QString answer; // The answer on the brick
-    bool correct;   // Whether this brick has the correct answer
-    QPixmap sprite; // Sprite for the brick
-
-    // do we need this
-    bool markedForDestruction = false;
+    BrickType m_type;
+    bool      correct;
+    QString   m_text;
+    QRectF    m_rect;
+    b2Body*   body = nullptr;
 };
 
 #endif // BRICK_H

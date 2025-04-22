@@ -4,27 +4,32 @@
 #include "contactlistener.h"
 #include "mainwindow.h"
 #include "mappage.h"
-#include <QPainter>        // for QPainter in paintEvent/drawGame
-#include <QMouseEvent>     // for QMouseEvent in mouse*Event()
-#include <QMessageBox>     // for QMessageBox in endGame()
+#include <QPainter>
+#include <QMouseEvent>
 #include <QMessageBox>
-#include <QTimer>        // for QTimer::singleShot
+#include <QTimer>
 #include <algorithm>
+#include <cmath>
+
+// pixels‑to‑meters ratio (must match Ball & Brick)
+static constexpr float PTM = 30.0f;
+
+// Bricks we’ll destroy after the physics step completes
+static std::vector<Brick*> pendingDestroy;
 
 GamePage::GamePage(QWidget *parent)
     : QWidget(parent)
     , ui(new Ui::GamePage)
-    , world(new b2World(b2Vec2(0.0f, 0.0f)))
+    , world(new b2World(b2Vec2(0.0f,0.0f)))
     , contactListener(new ContactListener(this))
     , rng(std::random_device{}())
 {
     ui->setupUi(this);
     setWindowTitle("Game");
 
-    // Hook up the contact listener
     world->SetContactListener(contactListener);
 
-    // Audio: background
+    // Audio setup...
     gameAudioOutput = new QAudioOutput(this);
     gameMusicPlayer = new QMediaPlayer(this);
     gameMusicPlayer->setAudioOutput(gameAudioOutput);
@@ -33,14 +38,12 @@ GamePage::GamePage(QWidget *parent)
     gameMusicPlayer->play();
     gameMusicPlayer->setLoops(QMediaPlayer::Infinite);
 
-    // Audio: click
     clickAudio = new QAudioOutput(this);
     clickPlayer = new QMediaPlayer(this);
     clickPlayer->setAudioOutput(clickAudio);
     clickPlayer->setSource(QUrl("qrc:/images/assets/button_click_sound_1.mp3"));
     clickAudio->setVolume(0.5);
 
-    // Audio: correct / wrong
     correctAudio = new QAudioOutput(this);
     correctPlayer = new QMediaPlayer(this);
     correctPlayer->setAudioOutput(correctAudio);
@@ -53,29 +56,26 @@ GamePage::GamePage(QWidget *parent)
     wrongPlayer->setSource(QUrl("qrc:/images/assets/wrong_sound.mp3"));
     wrongAudio->setVolume(0.5);
 
-    // Score label
     ui->scoreLabel->setText("0");
-    connect(this, &GamePage::scoreChanged, ui->scoreLabel, QOverload<int>::of(&QLabel::setNum));
+    connect(this, &GamePage::scoreChanged,
+            ui->scoreLabel, QOverload<int>::of(&QLabel::setNum));
 
-    // Timer label (you said your .ui has a QLabel* named 'timer')
     countdownTimer = new QTimer(this);
-    connect(countdownTimer, &QTimer::timeout, this, &GamePage::onTimerTick);
+    connect(countdownTimer, &QTimer::timeout,
+            this, &GamePage::onTimerTick);
     remainingTime = 60;
     ui->timer->setText(QString::number(remainingTime));
     countdownTimer->start(1000);
 
-    // Setup world
     setupObjects();
 
-    // Main loop for physics & repaint
     QTimer* loop = new QTimer(this);
     connect(loop, &QTimer::timeout, this, [this]() {
         updatePhysics();
-        update();  // trigger paintEvent
+        update();
     });
-    loop->start(16);  // ~60fps
+    loop->start(16);
 
-    // Buttons
     QString buttonStyle = R"(
     QPushButton {
         border: none;
@@ -93,8 +93,11 @@ GamePage::GamePage(QWidget *parent)
 
     ui->home->setStyleSheet(buttonStyle);
     ui->map->setStyleSheet(buttonStyle);
-    connect(ui->home, &QPushButton::clicked, this, &GamePage::homeButtonClicked);
-    connect(ui->map,  &QPushButton::clicked, this, &GamePage::mapButtonClicked);
+    connect(ui->home, &QPushButton::clicked,
+            this, &GamePage::homeButtonClicked);
+    connect(ui->map,  &QPushButton::clicked,
+            this, &GamePage::mapButtonClicked);
+
 
     QString labelStyle = R"(
     QLabel {
@@ -124,7 +127,6 @@ GamePage::GamePage(QWidget *parent)
     }
     )";
     ui->scoreTextLabel->setStyleSheet(scoreLabelStyle);
-
 }
 
 GamePage::~GamePage() {
@@ -134,23 +136,34 @@ GamePage::~GamePage() {
     delete ui;
 }
 
+void GamePage::addTime(int secs) {
+    remainingTime += secs;
+    ui->timer->setText(QString::number(remainingTime));
+}
+
 void GamePage::setupObjects() {
-    // Ball
     ball = new Ball(world);
 
-    // Walls
-    walls.push_back(new Wall(world, QRectF(0,0,800,30)));   // top
-    walls.push_back(new Wall(world, QRectF(0,0,30,800)));   // left
-    walls.push_back(new Wall(world, QRectF(800,0,30,800))); // right
+    walls.clear();
+    std::vector<QRectF> wallRects = {
+        {0,0,800,30}, {0,0,30,800},
+        {770,0,30,800}, {0,770,800,30}
+    };
+    for (auto& r : wallRects)
+        walls.push_back(new Wall(world, r));
 
-    // Platform (static)
-    b2BodyDef pd; pd.type = b2_staticBody; pd.position.Set(400,700);
+    b2BodyDef pd;
+    pd.type = b2_staticBody;
+    pd.position.Set(400/PTM, 700/PTM);
     platformBody = world->CreateBody(&pd);
-    b2PolygonShape ps; ps.SetAsBox(400,10);
-    b2FixtureDef pf; pf.shape = &ps; pf.density=1.0f;
+    b2PolygonShape ps;
+    ps.SetAsBox(100/PTM, 10/PTM);
+    b2FixtureDef pf;
+    pf.shape = &ps;
+    pf.density = 1.0f;
+
     platformBody->CreateFixture(&pf);
 
-    // Data & first round
     populateCountryData();
     setupRoundOne();
 }
@@ -172,62 +185,56 @@ void GamePage::setupRoundOne() {
     std::iota(idx.begin(), idx.end(), 0);
     std::shuffle(idx.begin(), idx.end(), rng);
     selectedCountries.clear();
-    for(int i=0; i<5; ++i) selectedCountries.append(allCountries[idx[i]]);
+    for(int i=0;i<5;++i)
+        selectedCountries.append(allCountries[idx[i]]);
 
-    // choose correct index
-    std::uniform_int_distribution<int> dist5(0,4);
-    int correctIdx = dist5(rng);
+    // choose target
+    std::uniform_int_distribution<int> d5(0,4);
+    int correctIdx = d5(rng);
     targetCountry = selectedCountries[correctIdx];
+
+    // always pick a fact index
+    std::uniform_int_distribution<int> dF(0,
+                                          targetCountry.facts.size()-1);
+    currentFactIndex = dF(rng);
 
     // build question
     std::uniform_int_distribution<int> coin(0,1);
-    bool askCapital = (coin(rng)==0);
+    bool askCapital = coin(rng)==0;
     QString q;
     if (askCapital) {
         q = QString("Which country has %1 as its capital?")
         .arg(targetCountry.capital);
     } else {
-        std::uniform_int_distribution<int> distF(0, targetCountry.facts.size()-1);
-        currentFactIndex = distF(rng);
         q = QString("Which country does this fact belong to?\n\"%1\"")
-                .arg(targetCountry.facts[currentFactIndex]);
+        .arg(targetCountry.facts[currentFactIndex]);
     }
     ui->questionLabel->setText(q);
     ui->questionLabel->setAlignment(Qt::AlignTop | Qt::AlignHCenter);
 
-    QPointF positions[5] = {
-        {175,275}, {375,275}, {575,275}, {275,475}, {475,475}
-    };
-
-    // Create an array of label pointers for easy access
-    QLabel* labels[5] = {
-        ui->label_3,
-        ui->label_4,
-        ui->label_5,
-        ui->label_6,
-        ui->label_7
-    };
-
-    for (QLabel* label : labels) {
-        label->clear();             // Optional: clear text
-        label->setVisible(false);   // Hide label
+    // circle positions
+    constexpr float cx=400, cy=400, R=200;
+    QVector<QPointF> pos;
+    for(int i=0;i<5;i++){
+        float a=2*M_PI*i/5.0f;
+        pos.append({cx+R*cos(a), cy+R*sin(a)});
     }
 
-    for(int i = 0; i < 5; ++i) {
-        const auto& country = selectedCountries[i];
-        bool isRight = (country.name == targetCountry.name);
-        qDebug() << "Spawning brick for" << country.name << "correct?" << isRight;
-
-        // Create the brick
-        bricks.push_back(
-            new Brick(world, positions[i], country.name, isRight)
-            );
-
-        // Set the corresponding label text
-        labels[i]->setText(country.name);
+    // spawn bricks once
+    std::uniform_real_distribution<> pu(0.0,1.0);
+    for(int i=0;i<5;i++){
+        const auto& c = selectedCountries[i];
+        bool isRight = (c.name==targetCountry.name);
+        BrickType type = (pu(rng)<0.2
+                              ? BrickType::TimeBonus
+                              : BrickType::Normal);
+        bricks.push_back(new Brick(world,
+                                   pos[i],
+                                   c.name,
+                                   isRight,
+                                   type));
     }
 }
-
 void GamePage::setupRoundTwo() {
     roundState = RoundState::MultipleChoice;
     destroyAllBricks();
@@ -287,57 +294,70 @@ void GamePage::setupRoundTwo() {
 
 void GamePage::updatePhysics() {
     world->Step(1/60.0f, 6, 2);
+
+    // safe destruction
+    for(auto* b : pendingDestroy){
+        b->destroy();
+        bricks.erase(
+            std::remove(bricks.begin(), bricks.end(), b),
+            bricks.end());
+        delete b;
+    }
+    pendingDestroy.clear();
 }
 
 void GamePage::handleContact(b2Body* A, b2Body* B) {
-    b2Body* ballBody = ball->getBody();
-    if (A!=ballBody && B!=ballBody) return;
-    b2Body* other = (A==ballBody?B:A);
+    b2Body* ballBody=ball->getBody();
+    if(A!=ballBody && B!=ballBody) return;
+    b2Body* other=(A==ballBody?B:A);
 
-    Brick* hit = nullptr;
-    for (auto* b : bricks) {
-        if (b->getBody()==other) { hit=b; break; }
-    }
-    if (!hit) return;
+    Brick* hit=nullptr;
+    for(auto* b:bricks)
+        if(b->getBody()==other){ hit=b; break; }
+    if(!hit) return;
 
-    // Safely handle the brick contact using a timer to avoid physics issues
-    QTimer::singleShot(0, this, [this, hit]() {
-        bool correct = hit->isCorrectAnswer();
+    QTimer::singleShot(0,this,[this,hit](){
+        hit->onHit(this);
+        bool isPU= hit->getType()!=BrickType::Normal;
+        bool correct=hit->isCorrectAnswer();
 
-        // Score & round transition
-        if (roundState == RoundState::MultipleChoice) {
-            if (correct) {
-                score += 10;
-                ++correctCount;
-                playCorrectSound();
-                emit scoreChanged(score);
-                QTimer::singleShot(500, this, &GamePage::setupRoundTwo);
+        if(!isPU){
+            if(roundState==RoundState::MultipleChoice){
+                if(correct){
+                    score+=10; ++correctCount; playCorrectSound();
+                    emit scoreChanged(score);
+                    QTimer::singleShot(500,this,
+                                       &GamePage::setupCountrySpecificRound);
+                } else {
+                    ++wrongCount; score=std::max(0,score-5);
+                    playWrongSound(); emit scoreChanged(score);
+                }
+
             } else {
-                ++wrongCount;
-                score = std::max(0, score - 5);
-                playWrongSound();
+                if(correct){
+                    ++correctCount; score+=5; playCorrectSound();
+                } else {
+                    ++wrongCount; score=std::max(0,score-2);
+                    playWrongSound();
+                }
                 emit scoreChanged(score);
+                QTimer::singleShot(500,
+                                   this,&GamePage::setupRoundOne);
             }
-        } else { // True/False round
-            if (correct) {
-                ++correctCount;
-                score += 5;
-                playCorrectSound();
-            } else {
-                ++wrongCount;
-                score = std::max(0, score - 2);
-                playWrongSound();
-            }
-            emit scoreChanged(score);
-            QTimer::singleShot(500, this, &GamePage::setupRoundOne);
         }
 
-        // Now it's safe to destroy the brick
-        hit->destroy();
-        bricks.erase(std::remove(bricks.begin(), bricks.end(), hit), bricks.end());
-        delete hit;
+        // queue destruction
+        pendingDestroy.push_back(hit);
 
-        // Reset the ball after destruction
+        // if none remain, advance round
+        if(bricks.size()==1){
+            // size==1 because we haven’t erased yet
+            QTimer::singleShot(500,this,
+                               roundState==RoundState::MultipleChoice
+                                   ? &GamePage::setupCountrySpecificRound
+                                   : &GamePage::setupRoundOne);
+        }
+
         ball->resetPosition();
     });
 }
@@ -351,86 +371,84 @@ void GamePage::paintEvent(QPaintEvent*) {
 
 void GamePage::drawGame(QPainter& p) {
     ball->draw(p);
-    for (auto* w : walls)  w->draw(p);
-    for (auto* b : bricks) if (b->getBody()) b->draw(p);
+    for(auto* w:walls) w->draw(p);
+    for(auto* b:bricks) if(b->getBody()) b->draw(p);
     drawPlatform(p);
-
-    if (!aimStart.isNull() && !aimEnd.isNull()) {
+    if(!aimStart.isNull()&&!aimEnd.isNull()){
         p.setPen(QPen(Qt::white,2));
-        p.drawLine(aimStart, aimEnd);
-        if (roundState==RoundState::MultipleChoice)
-            drawReflectedLine(p, aimStart, aimEnd);
+        p.drawLine(aimStart,aimEnd);
+        if(roundState==RoundState::MultipleChoice)
+            drawReflectedLine(p,aimStart,aimEnd);
     }
 }
 
-void GamePage::drawPlatform(QPainter& p) {
-    auto pos = platformBody->GetPosition();
+void GamePage::drawPlatform(QPainter& p){
+    auto pos=platformBody->GetPosition();
     p.setBrush(Qt::gray);
+
     p.drawRect(QRectF(pos.x-370, pos.y-10, 770,20));
 }
 
-void GamePage::drawReflectedLine(QPainter& p, const QPointF& A, const QPointF& B) {
-    QPointF d = B - A;
-    // intersect with y=30 (top wall bottom edge):
-    if (d.y()==0) return;
-    float t = (30 - A.y())/d.y();
-    if (t>0 && t<1) {
-        QPointF hit = A + d*t;
-        QPointF refl{ d.x(), -d.y() };
+void GamePage::drawReflectedLine(QPainter& p,
+                                 const QPointF& A,const QPointF& B){
+    QPointF d=B-A;
+    if(d.y()==0) return;
+    float t=(30-A.y())/d.y();
+    if(t>0&&t<1){
+        QPointF hit=A+d*t;
+        QPointF r{d.x(),-d.y()};
         p.setPen(QPen(Qt::white,1,Qt::DashLine));
-        p.drawLine(hit, hit + refl*0.5);
+        p.drawLine(hit,hit+r*0.5);
     }
 }
 
-void GamePage::mousePressEvent(QMouseEvent *e) {
-    aimStart = {ball->getBody()->GetPosition().x,
-                ball->getBody()->GetPosition().y};
-    aimEnd = e->pos();
+void GamePage::mousePressEvent(QMouseEvent* e){
+    aimStart={ball->getBody()->GetPosition().x*PTM,
+                ball->getBody()->GetPosition().y*PTM};
+    aimEnd=e->pos();
 }
 
-void GamePage::mouseMoveEvent(QMouseEvent *e) {
-    aimEnd = e->pos();
+void GamePage::mouseMoveEvent(QMouseEvent* e){
+    aimEnd=e->pos();
 }
 
-void GamePage::mouseReleaseEvent(QMouseEvent*) {
-    QPointF dir = aimEnd - aimStart;
-    float mag = std::hypot(dir.x(), dir.y());
-    if (mag==0) return;
-    QPointF norm = dir/mag;
-    constexpr float speed=500000.0f;
-    ball->setVelocity(norm*speed);
-    aimStart = aimEnd = {};
+void GamePage::mouseReleaseEvent(QMouseEvent*){
+    QPointF dir=aimEnd-aimStart;
+    float m=std::hypot(dir.x(),dir.y());
+    if(m==0) return;
+    QPointF n=dir/m;
+    constexpr float speed=600.0f;
+    ball->setVelocity(n*speed);
+    aimStart=aimEnd={};
 }
 
-void GamePage::onTimerTick() {
-    remainingTime--;
+void GamePage::onTimerTick(){
+    --remainingTime;
     ui->timer->setText(QString::number(remainingTime));
-    if (remainingTime<=0) {
+    if(remainingTime<=0){
         countdownTimer->stop();
         endGame();
     }
 }
 
+
 void GamePage::endGame() {
-    auto* results = new ResultPage(score,correctCount,wrongCount);
+    auto* r = new ResultPage(score,correctCount,wrongCount);
     gameMusicPlayer->stop();
-    results->show();
+    r->show();
     close();
 }
 
-
-void GamePage::homeButtonClicked() {
+void GamePage::homeButtonClicked(){
     clickPlayer->play();
     gameMusicPlayer->stop();
-    (new MainWindow())->show();
-    close();
+    (new MainWindow())->show(); close();
 }
 
-void GamePage::mapButtonClicked() {
+void GamePage::mapButtonClicked(){
     clickPlayer->play();
     gameMusicPlayer->stop();
-    (new MapPage())->show();
-    close();
+    (new MapPage())->show(); close();
 }
 
 
