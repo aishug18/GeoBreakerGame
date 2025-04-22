@@ -212,13 +212,23 @@ void GamePage::setupRoundOne() {
     ui->questionLabel->setText(q);
     ui->questionLabel->setAlignment(Qt::AlignTop | Qt::AlignHCenter);
 
-    // circle positions
-    constexpr float cx=400, cy=400, R=200;
-    QVector<QPointF> pos;
-    for(int i=0;i<5;i++){
-        float a=2*M_PI*i/5.0f;
-        pos.append({cx+R*cos(a), cy+R*sin(a)});
+    QLabel* labels[5] = {
+        ui->label_3,
+        ui->label_4,
+        ui->label_5,
+        ui->label_6,
+        ui->label_7
+    };
+
+    for (QLabel* label : labels) {
+        label->clear();
+        label->setVisible(false);
     }
+
+    QPointF pos[5] = {
+        {175,275}, {375,275}, {575,275}, {275,475}, {475,475}
+    };
+
 
     // spawn bricks once
     std::uniform_real_distribution<> pu(0.0,1.0);
