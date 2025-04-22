@@ -3,6 +3,7 @@
 
 #include <QRectF>
 #include <Box2D/Box2D.h>
+#include <QPixmap>
 
 class QPainter;
 
@@ -17,6 +18,7 @@ public:
 private:
     b2Body* body;
     QRectF m_rect;  // Add this member variable to store rectangle for drawing
+    QPixmap sprite; // Sprite for the wall
 };
 
 #endif // WALL_H

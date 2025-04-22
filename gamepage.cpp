@@ -146,9 +146,9 @@ void GamePage::setupObjects() {
 
     walls.clear();
     std::vector<QRectF> wallRects = {
-        {0,0,800,30}, {0,0,30,800},
-        {770,0,30,800}, {0,770,800,30}
-    };
+        {0,0,800,40}, {0,0,40,800},
+        {760,0,40,800}, {0,740,800,40}
+    };  // top, left, right, bottom
     for (auto& r : wallRects)
         walls.push_back(new Wall(world, r));
 
@@ -372,7 +372,7 @@ void GamePage::drawPlatform(QPainter& p){
     auto pos=platformBody->GetPosition();
     p.setBrush(Qt::gray);
 
-    p.drawRect(QRectF(pos.x-370, pos.y-10, 770,20));
+    p.drawRect(QRectF(300, 700, 200, 20));
 }
 
 void GamePage::drawReflectedLine(QPainter& p,

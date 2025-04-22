@@ -23,6 +23,8 @@ Wall::Wall(b2World* world, const QRectF& rectPx) {
     fd.friction    = 0.3f;
     fd.restitution = 1.0f;   // **FULL** bounce
     body->CreateFixture(&fd);
+
+    sprite.load(":/images/assets/wall_sprite.jpg");
 }
 
 Wall::~Wall() {
@@ -31,8 +33,12 @@ Wall::~Wall() {
 }
 
 void Wall::draw(QPainter& painter) {
+    QPixmap scaledSprite = sprite.scaled(150, 150, Qt::IgnoreAspectRatio, Qt::SmoothTransformation);
+    QBrush brush(scaledSprite);
+
     painter.save();
-    painter.setBrush(Qt::darkGray);
+    painter.setBrush(brush);
+    painter.setBrush(brush);
     painter.setPen(Qt::NoPen);
     painter.drawRect(m_rect);
     painter.restore();
