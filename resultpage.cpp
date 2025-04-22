@@ -1,49 +1,101 @@
 #include "resultpage.h"
-#include "ui_resultpage.h"
 #include "mainwindow.h"
 #include "mappage.h"
 #include <QSettings>
 #include <algorithm>
+#include <QVBoxLayout>
+#include <QHBoxLayout>
+#include <QLabel>
+#include <QPushButton>
+#include <QPainter>
+#include <QListWidget>
 
 ResultPage::ResultPage(int finalScore,
                        int correctCount,
                        int wrongCount,
                        QWidget* parent)
     : QWidget(parent)
-    , ui(new Ui::ResultPage)
 {
-    ui->setupUi(this);
+    setWindowTitle("Game Over");
 
-    // 1) Persist & load top‑5 high scores
-    QSettings settings("MyCompany","GeoBreaker");
+    // Main layout setup
+    auto* layout = new QVBoxLayout(this);
+    layout->setContentsMargins(80, 80, 80, 80);
+    layout->setSpacing(40);
+
+    // Score display
+    auto* scoreLabel = new QLabel(
+        QString("Your Final Score:\n%1").arg(finalScore), this);
+    scoreLabel->setAlignment(Qt::AlignCenter);
+    scoreLabel->setStyleSheet(
+        "font-size: 48px; font-weight: bold; color: black;");
+    layout->addWidget(scoreLabel);
+
+    // Correct/wrong counters
+    auto* correctLabel = new QLabel(
+        QString("✅ Correct Answers: %1").arg(correctCount), this);
+    auto* wrongLabel = new QLabel(
+        QString("❌ Wrong Answers: %1").arg(wrongCount), this);
+
+    correctLabel->setAlignment(Qt::AlignCenter);
+    wrongLabel->setAlignment(Qt::AlignCenter);
+    correctLabel->setStyleSheet("font-size: 32px; color: green;");
+    wrongLabel->setStyleSheet("font-size: 32px; color: red;");
+
+    layout->addWidget(correctLabel);
+    layout->addWidget(wrongLabel);
+
+    // High score handling (from dev branch)
+    QSettings settings("MyCompany", "GeoBreaker");
     QStringList scores = settings.value("highScores").toStringList();
     scores << QString::number(finalScore);
     std::sort(scores.begin(), scores.end(),
-              [](auto &a, auto &b){ return a.toInt() > b.toInt(); });
-    if (scores.size()>5) scores.resize(5);
+              [](const QString &a, const QString &b) {
+                  return a.toInt() > b.toInt();
+              });
+    if(scores.size() > 5) scores.resize(5);
     settings.setValue("highScores", scores);
 
-    // 2) Populate the QListWidget in the UI
-    ui->highScoreList->clear();
-    ui->highScoreList->addItems(scores);
+    // High score list (from dev branch, styled for test branch)
+    auto* highScoreList = new QListWidget(this);
+    highScoreList->addItems(scores);
+    highScoreList->setStyleSheet(
+        "font-size: 24px; background-color: rgba(255, 255, 255, 200);"
+        "border-radius: 10px; padding: 10px;");
+    highScoreList->setFixedHeight(150);
+    layout->addWidget(highScoreList);
 
-    // 3) Update the rest of the widgets
-    ui->yourScoreLabel->setText(
-        QString("Your Final Score:\n%1").arg(finalScore));
-    ui->correctLabel->setText(
-        QString("✅ Correct: %1").arg(correctCount));
-    ui->wrongLabel->setText(
-        QString("❌ Wrong: %1").arg(wrongCount));
+    // Button layout (from test branch with improved styling)
+    auto* btnLayout = new QHBoxLayout;
+    auto* mainMenuBtn = new QPushButton("🏠 Main Menu", this);
+    auto* mapBtn = new QPushButton("🗺️ Map", this);
 
-    // 4) Wire up buttons
-    connect(ui->mainMenuBtn, &QPushButton::clicked,
+    QString btnStyle = 
+        "font-size: 24px; padding: 20px 40px;"
+        "border-radius: 10px; min-width: 200px;";
+    mainMenuBtn->setStyleSheet(btnStyle + "background-color: #4CAF50; color: white;");
+    mapBtn->setStyleSheet(btnStyle + "background-color: #2196F3; color: white;");
+
+    btnLayout->addStretch();
+    btnLayout->addWidget(mainMenuBtn);
+    btnLayout->addSpacing(40);
+    btnLayout->addWidget(mapBtn);
+    btnLayout->addStretch();
+    layout->addLayout(btnLayout);
+
+    // Connect buttons (from both branches)
+    connect(mainMenuBtn, &QPushButton::clicked,
             this, &ResultPage::onMainMenuClicked);
-    connect(ui->mapBtn,      &QPushButton::clicked,
+    connect(mapBtn, &QPushButton::clicked,
             this, &ResultPage::onMapClicked);
 }
 
-ResultPage::~ResultPage() {
-    delete ui;
+ResultPage::~ResultPage() {}
+
+void ResultPage::paintEvent(QPaintEvent* event) {
+    QPainter painter(this);
+    QPixmap bg(":/images/assets/result_background.jpg");
+    painter.drawPixmap(0, 0, width(), height(), bg);
 }
 
 void ResultPage::onMainMenuClicked() {

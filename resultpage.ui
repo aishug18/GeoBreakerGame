@@ -4,18 +4,34 @@
  <widget class="QWidget" name="ResultPage">
   <property name="geometry">
    <rect>
-    <x>0</x><y>0</y><width>619</width><height>475</height>
+    <x>0</x>
+    <y>0</y>
+    <width>680</width>
+    <height>560</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Game Over</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout">
-   <!-- 1) High Scores Title -->
+  <property name="styleSheet">
+   <string notr="true">background-color: #f0f2f5;</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout" spacing="20">
+   <property name="contentsMargins">
+    <left>40</left>
+    <top>40</top>
+    <right>40</right>
+    <bottom>40</bottom>
+   </property>
+   
+   <!-- High Scores Section -->
    <item>
     <widget class="QLabel" name="labelHighScores">
      <property name="styleSheet">
-      <string>font-size:24px; font-weight:bold;</string>
+      <string>font-size: 28px; 
+               font-weight: bold; 
+               color: #2c3e50;
+               padding-bottom: 15px;</string>
      </property>
      <property name="text">
       <string>🏆 Top 5 High Scores</string>
@@ -25,37 +41,54 @@
      </property>
     </widget>
    </item>
-   <!-- 2) High Scores List -->
+   
    <item>
     <widget class="QListWidget" name="highScoreList">
      <property name="minimumSize">
       <size>
-       <width>0</width><height>120</height>
+       <width>0</width>
+       <height>140</height>
       </size>
+     </property>
+     <property name="styleSheet">
+      <string>font-size: 20px;
+               background-color: white;
+               border: 2px solid #dfe4ea;
+               border-radius: 8px;
+               padding: 10px;</string>
      </property>
     </widget>
    </item>
-   <!-- 3) Your Final Score -->
+
+   <!-- Final Score -->
    <item>
     <widget class="QLabel" name="yourScoreLabel">
      <property name="styleSheet">
-      <string>font-size:24px; font-weight:bold; color:#5239FF;</string>
+      <string>font-size: 32px;
+               font-weight: bold;
+               color: #5239FF;
+               padding: 20px 0;</string>
      </property>
      <property name="text">
-      <string>Your final score: 0</string>
+      <string>Your Final Score: 0</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>
      </property>
     </widget>
    </item>
-   <!-- 4) Correct/Wrong Stats -->
+
+   <!-- Stats Row -->
    <item>
-    <layout class="QHBoxLayout" name="statsLayout">
+    <layout class="QHBoxLayout" name="statsLayout" spacing="30">
      <item>
       <widget class="QLabel" name="correctLabel">
        <property name="styleSheet">
-        <string>font-size:18px; color:#27ae60;</string>
+        <string>font-size: 20px;
+                 color: #27ae60;
+                 padding: 8px 16px;
+                 background-color: rgba(39, 174, 96, 0.1);
+                 border-radius: 6px;</string>
        </property>
        <property name="text">
         <string>✅ Correct: 0</string>
@@ -65,7 +98,11 @@
      <item>
       <widget class="QLabel" name="wrongLabel">
        <property name="styleSheet">
-        <string>font-size:18px; color:#c0392b;</string>
+        <string>font-size: 20px;
+                 color: #c0392b;
+                 padding: 8px 16px;
+                 background-color: rgba(192, 57, 43, 0.1);
+                 border-radius: 6px;</string>
        </property>
        <property name="text">
         <string>❌ Wrong: 0</string>
@@ -74,44 +111,63 @@
      </item>
     </layout>
    </item>
-   <!-- 5) Buttons -->
+
+   <!-- Buttons -->
    <item>
-    <layout class="QHBoxLayout" name="buttonLayout" stretch="0,0">
+    <layout class="QHBoxLayout" name="buttonLayout" spacing="40">
+     <property name="contentsMargins">
+      <left>0</left>
+      <top>30</top>
+      <right>0</right>
+      <bottom>0</bottom>
+     </property>
      <item>
       <widget class="QPushButton" name="mainMenuBtn">
+       <property name="minimumSize">
+        <size>
+         <width>180</width>
+         <height>60</height>
+        </size>
+       </property>
        <property name="styleSheet">
-        <string>
-         QPushButton {
-           background-color: #5239FF;
-           color: white;
-           border-radius: 8px;
-           padding: 12px;
-           font-size: 16px;
-         }
-         QPushButton:hover { background-color: #3a1db9; }
-        </string>
+        <string>QPushButton {
+                  background-color: #5239FF;
+                  color: white;
+                  border-radius: 8px;
+                  font-size: 20px;
+                  padding: 12px 24px;
+                }
+                QPushButton:hover {
+                  background-color: #3a1db9;
+                }</string>
        </property>
        <property name="text">
-        <string>Main Menu</string>
+        <string>🏠 Main Menu</string>
        </property>
       </widget>
      </item>
      <item>
       <widget class="QPushButton" name="mapBtn">
+       <property name="minimumSize">
+        <size>
+         <width>180</width>
+         <height>60</height>
+        </size>
+       </property>
        <property name="styleSheet">
-        <string>
-         QPushButton {
-           background-color: #FF784E;
-           color: white;
-           border-radius: 8px;
-           padding: 12px;
-           font-size: 16px;
-         }
-         QPushButton:hover { background-color: #e86e3e; }
-        </string>
+        <string>QPushButton {
+                  background-color: #FF784E;
+                  color: white;
+                  border-radius: 8px;
+                  font-size: 20px;
+                  padding: 12px 24px;
+                }
+                QPushButton:hover {
+                  background-color: #e86e3e;
+                }</string>
        </property>
        <property name="text">
-        <string>Map</string>
+        <string>🗺️ View Map</string>
        </property>
       </widget>
      </item>

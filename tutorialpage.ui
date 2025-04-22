@@ -6,79 +6,52 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>408</width>
-    <height>594</height>
+    <width>800</width>
+    <height>900</height>
    </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <widget class="QDialogButtonBox" name="buttonBox">
-   <property name="geometry">
-    <rect>
-     <x>270</x>
-     <y>540</y>
-     <width>101</width>
-     <height>32</height>
-    </rect>
-   </property>
-   <property name="orientation">
-    <enum>Qt::Orientation::Horizontal</enum>
-   </property>
-   <property name="standardButtons">
-    <set>QDialogButtonBox::StandardButton::Close</set>
-   </property>
-  </widget>
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>20</x>
-     <y>20</y>
-     <width>361</width>
-     <height>511</height>
+     <x>150</x>
+     <y>40</y>
+     <width>500</width>
+     <height>621</height>
     </rect>
    </property>
    <property name="text">
-    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:18pt; font-weight:700;&quot;&gt;Tutorial&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;Welcome to GeoBreaker! Learn about other countries and geography, and put your knowledge to the test by playing a &amp;quot;brick-breaking&amp;quot; game!&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;Click Play! to start the game. This will take you to a world map where you can click on pins to learn about different countries.&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;Once you have learned about the countries, click on the Enter Game button to start the game.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:11pt; font-weight:700;&quot;&gt;Game Play&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;A question will appear at the top. To earn points, aim the ball at the brick that contains the correct answer to the question. To aim, click and drag, then release to fire the ball. You will earn points for getting the right answer, and you will lose points if you hit the wrong answer.&lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;The questions are categorized by countries, and each will have five questions/rounds. &lt;/p&gt;&lt;p align=&quot;justify&quot;&gt;Get the highest score to win!&lt;br/&gt;&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:16pt; font-weight:700;&quot;&gt;Tutorial&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:16pt;&quot;&gt;Welcome to GeoBreaker! Learn about other countries and geography, and put your knowledge to the test by playing a &amp;quot;brick-breaking&amp;quot; game!&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:16pt;&quot;&gt;Click Play! to start the game. This will take you to a world map where you can click on pins to learn about different countries.&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:16pt;&quot;&gt;Once you have learned about the countries, click on the Enter Game button to start the game.&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:16pt; font-weight:700;&quot;&gt;Game Play&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:16pt;&quot;&gt;A question will appear at the top. To earn points, aim the ball at the brick that contains the correct answer to the question. To aim, click and drag, then release to fire the ball. You will earn points for getting the right answer, and you will lose points if you hit the wrong answer.&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:16pt;&quot;&gt;The questions are categorized by countries, and each will have five questions/rounds. &lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:16pt;&quot;&gt;Get the highest score to win!&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+   <property name="textFormat">
+    <enum>Qt::TextFormat::AutoText</enum>
    </property>
    <property name="wordWrap">
     <bool>true</bool>
    </property>
   </widget>
+  <widget class="QPushButton" name="closeButton">
+   <property name="geometry">
+    <rect>
+     <x>250</x>
+     <y>710</y>
+     <width>300</width>
+     <height>150</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Close</string>
+   </property>
+  </widget>
  </widget>
  <resources/>
- <connections>
-  <connection>
-   <sender>buttonBox</sender>
-   <signal>accepted()</signal>
-   <receiver>TutorialPage</receiver>
-   <slot>accept()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>248</x>
-     <y>254</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>157</x>
-     <y>274</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>buttonBox</sender>
-   <signal>rejected()</signal>
-   <receiver>TutorialPage</receiver>
-   <slot>reject()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>316</x>
-     <y>260</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>286</x>
-     <y>274</y>
-    </hint>
-   </hints>
-  </connection>
- </connections>
+ <connections/>
 </ui>
