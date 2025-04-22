@@ -1,24 +1,34 @@
 #include "ball.h"
 #include <Box2D/Box2D.h>
-#include <cstdint>
+#include <QPainter>
+#include <QRadialGradient>
+#include <cmath>
 
-Ball::Ball(b2World* world) : startPosition(400.0f, 675.0f) {
-    // Define and create the ball's physics body
-    b2BodyDef bodyDef;
-    bodyDef.type = b2_dynamicBody;
-    bodyDef.position.Set(startPosition.x(), startPosition.y());
-    bodyDef.bullet = true;  // Treats the object as a high speed collision
-    body = world->CreateBody(&bodyDef);
+// pixels‑to‑meters ratio
+static constexpr float PTM = 30.0f;
 
-    b2CircleShape shape;
-    shape.m_radius = radius;  // Ball radius, adjust accordingly
+Ball::Ball(b2World* world)
+    : startPosition(400.0f, 675.0f)
+{
+    b2BodyDef bd;
+    bd.type   = b2_dynamicBody;
+    bd.bullet = true;
+    bd.position.Set(startPosition.x() / PTM,
+                    startPosition.y() / PTM);
+    body = world->CreateBody(&bd);
 
-    b2FixtureDef fixtureDef;
-    fixtureDef.shape = &shape;
-    fixtureDef.density = 0.1f;
-    fixtureDef.friction = 0.1f;
-    fixtureDef.restitution = 1.0f;  // Bouncy ball
-    body->CreateFixture(&fixtureDef);
+    b2CircleShape circle;
+    circle.m_radius = radius / PTM;
+
+    b2FixtureDef fd;
+    fd.shape       = &circle;
+    fd.density     = 1.0f;
+    fd.friction    = 0.0f;
+    fd.restitution = 0.9f;
+    body->CreateFixture(&fd);
+
+    body->SetLinearDamping(0.1f);
+    body->SetAngularDamping(0.1f);
 }
 
 Ball::~Ball() {
@@ -28,26 +38,35 @@ Ball::~Ball() {
 }
 
 void Ball::draw(QPainter& painter) {
-    // Render ball based on physics body's position
-    QPointF position(body->GetPosition().x, body->GetPosition().y);
+    // physics (m) → screen (px)
+    b2Vec2  posM = body->GetPosition();
+    QPointF posPx(posM.x * PTM, posM.y * PTM);
 
-    QRadialGradient gradient(position, radius);
-    gradient.setColorAt(0, QColor(255, 255, 255));
-    gradient.setColorAt(0.3, Qt::red);
-    gradient.setColorAt(1, Qt::darkRed);
+    QRadialGradient grad(posPx, radius);
+    grad.setColorAt(0.0, QColor(255,255,255));
+    grad.setColorAt(0.3, Qt::red);
+    grad.setColorAt(1.0, Qt::darkRed);
 
     painter.save();
-    painter.setBrush(gradient);
+    painter.setBrush(grad);
     painter.setPen(Qt::NoPen);
-    painter.drawEllipse(position, radius, radius);
+    painter.drawEllipse(posPx, radius, radius);
     painter.restore();
 }
 
-void Ball::setVelocity(const QPointF& velocity) {
-    body->SetLinearVelocity(b2Vec2(velocity.x(), velocity.y()));
+void Ball::setVelocity(const QPointF& velocityPx) {
+    // convert px/s → m/s
+    b2Vec2 velM(velocityPx.x() / PTM,
+                velocityPx.y() / PTM);
+    body->SetLinearVelocity(velM);
 }
 
 void Ball::resetPosition() {
-    body->SetTransform(b2Vec2(startPosition.x(), startPosition.y()), 0.0f);
-    body->SetLinearVelocity(b2Vec2(0.0f, 0.0f));    // Stop movement
+    body->SetTransform(
+        b2Vec2(startPosition.x()/PTM,
+               startPosition.y()/PTM),
+        0.0f
+        );
+    body->SetLinearVelocity(b2Vec2(0,0));
+    body->SetAngularVelocity(0);
 }

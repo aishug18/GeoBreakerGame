@@ -129,7 +129,6 @@ FORMS += \
     gamepage.ui \
     mainwindow.ui \
     mappage.ui \
-    resultpage.ui \
     tutorialpage.ui
 
 # Default rules for deployment.
