@@ -56,6 +56,10 @@ GamePage::GamePage(QWidget *parent)
     wrongPlayer->setSource(QUrl("qrc:/images/assets/wrong_sound.mp3"));
     wrongAudio->setVolume(0.5);
 
+    score = 0;
+    correctCount = 0;
+    wrongCount = 0;
+
     ui->scoreLabel->setText("0");
     connect(this, &GamePage::scoreChanged,
             ui->scoreLabel, QOverload<int>::of(&QLabel::setNum));
@@ -436,7 +440,6 @@ void GamePage::mapButtonClicked(){
     gameMusicPlayer->stop();
     (new MapPage())->show(); close();
 }
-
 
 void GamePage::populateCountryData() {
     // Australia
